@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<meta charset="UTF-8">
 	<link href="https://fonts.googleapis.com/css?family=Libre+Baskerville" rel="stylesheet">
 	<title>Enneagram Test</title>
 	<style type="text/css">
@@ -29,18 +30,31 @@
 
 		}
 
-
 		.tab td {
 			text-align: center;
 			padding: 1.2em;
 			border-bottom: 1px solid #ddd;
 			border-top: 1px solid #ddd;
+			cursor: pointer;
 		}
 
 		.buttons td {
-			border-bottom: 0;
-			border-top: 0;
+			!border-bottom: 0;
+			!border-top: 0;
+			margin-right: 10px;
 		}
+		.buttons td:hover {
+			background-color: rgba(128, 128, 128, 0.15);
+			!border-radius: 30px;
+		}
+		.buttons td:hover input {
+			display: none;
+		}
+		.buttons td:hover input + label {
+			display: inline-block;
+			color: green;
+		}
+
 		.buttons td:nth-child(4) {
 			box-shadow: inset 1px 0px 0px 0px rgba(128, 128, 128, 0.15);
 		}
@@ -60,6 +74,34 @@
 		body {
 			margin: 0;
 		}
+
+		input[type="radio"] {
+			
+  			cursor: pointer;
+		}
+
+		input[type="radio"]:checked {
+			display: none;
+		}
+
+		input[type="radio"] + label {
+			display: none;
+		}
+
+		input[type="radio"]:checked + label {
+			display: inline-block;
+			color: green;
+		}
+
+		@keyframes faderow {
+			0% {opacity: 1; background-color: rgba(128, 128, 128, 0.15);}
+   			100% {opacity: 0;} 
+		}
+		.fadeRow {
+            !animation: faderow 0.5s;
+            opacity: 0.3;
+
+        }
 
 	</style>
 </head>
@@ -123,15 +165,16 @@
 	for (var i = 0; i < items.length; i++) {
 		var itemrow = items[i];
 
-		if ( i % 3 == 0 && i > 0) {
+		if (false && i % 3 == 0 && i > 0) {
 			// empty row after every 3rd item
 			var row = table.insertRow(ridx++);
+
 			var cell1 = row.insertCell(0);
 			var cell3 = row.insertCell(1);
 			var cell2 = row.insertCell(2);
 		}
-
 		var row = table.insertRow(ridx++);
+		row.setAttribute('id', ridx);
 		var cell1 = row.insertCell(0);
 		var cell3 = row.insertCell(1);
 		var cell2 = row.insertCell(2);
@@ -141,12 +184,12 @@
 		var htmlstr = '<table class="buttons"><tr>';
 		
 		for (var j = -3; j < 0; j++) {
-			htmlstr += '<td><input type=radio name='+i+' value='+j+' onclick="checkItem(this)"></td>';
+			htmlstr += '<td onclick="tickItem(this.children[0])"><input data-row='+ridx+' type=radio name='+i+' value='+j+' "><label>&#10004;</label></td>';
 		}
 	
 
 		for (var j = 1; j < 4; j++) {
-			htmlstr += '<td><input type=radio name='+i+' value='+j+' onclick="checkItem(this)"></td>';
+			htmlstr += '<td onclick="tickItem(this.children[0])"><input data-row='+ridx+' type=radio name='+i+' value='+j+' "><label>&#10004;</label></td>';
 		}
 		htmlstr += '</tr></table>';
 
@@ -157,13 +200,19 @@
 	var glValues = {m:0,s:0,i:0};
 	var glAnswers= {tab1:[], tab2:[], tab3:[], tab4:[]};
 
-	function checkItem(item){
-		console.log(item.checked);
+	function tickItem(item){
+		//console.log('item checked', item.checked);
+		item.checked = true;
 		var itemID = item.name;
 		var answerItem = items[itemID][(item.value<0)?0:1];
 		glAnswers.tab1[itemID] = [answerItem,item.value];
-		console.log(glAnswers);
+		//console.log(glAnswers);
 		calcResults();
+		rowId = item.dataset.row;
+		row = document.getElementById(rowId);
+		//row.addEventListener('AnimationEnd',function( event ) { row.style.display = 'none'; }, false);
+		row.classList.add('fadeRow');
+		checkIsDone();
 	}
 
 	function calcResults() {
@@ -185,11 +234,13 @@
 			}
 		};
 		console.log(glValues);
-		
 	}
 	
+	function checkIsDone () {
+		var finishedItems = glAnswers.tab1.length;
+		console.log('finished', finishedItems == items.length);
 
-	
+	}
 </script>
 
 </body>
