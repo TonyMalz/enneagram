@@ -7,7 +7,7 @@
 	<style type="text/css">
 		body {
 			font-family: "Libre Baskerville",Georgia,serif;
-			font-size: 1.2em;
+			font-size: 1.3em;
 		}
 		.main {
 			display: table;
@@ -15,11 +15,7 @@
   			margin-left: auto;
   			box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   			overflow: hidden;
-  			margin-top: 70px;
-		}
-
-		.divider {
-			width: 5px;
+  			margin-top: 90px;
 		}
 
 		.tab {
@@ -39,36 +35,25 @@
 		}
 
 		.buttons td {
-			!border-bottom: 0;
-			!border-top: 0;
 			margin-right: 10px;
 		}
-		.buttons td:hover {
-			background-color: rgba(128, 128, 128, 0.15);
-			!border-radius: 30px;
-		}
-		.buttons td:hover input {
-			display: none;
-		}
-		.buttons td:hover input + label {
-			display: inline-block;
-			color: green;
-		}
+
 
 		.buttons td:nth-child(4) {
-			box-shadow: inset 1px 0px 0px 0px rgba(128, 128, 128, 0.15);
+			box-shadow: inset 2px 0px 0px 0px rgba(128, 128, 128, 0.15);
 		}
 
 		.header {
-		    padding: 25px;
+		    padding: 30px;
 		    text-align: center;
-		    font-size: 1.1em;
+		    font-size: 1.3em;
 		    color: white;
 			overflow: hidden;
 		    background-color: #333;
 		    position: fixed; /* Set the navbar to fixed position */
 		    top: 0; /* Position the navbar at the top of the page */
 		    width: 100%; /* Full width */
+		    z-index: 1;
 		}
 
 		body {
@@ -93,15 +78,12 @@
 			color: green;
 		}
 
-		@keyframes faderow {
-			0% {opacity: 1; background-color: rgba(128, 128, 128, 0.15);}
-   			100% {opacity: 0;} 
+		@media all and (max-width: 1130px){
+			.main {
+  				margin-top: 120px;
+			}
 		}
-		.fadeRow {
-            !animation: faderow 0.5s;
-            opacity: 0.3;
-
-        }
+}
 
 	</style>
 </head>
@@ -131,9 +113,9 @@
 	[{text:'wortkarg', type:'i'},{text:'redegewandt',type:'ms'}],
 	[{text:'konzentriert', type:'i'},{text:'leicht ablenkbar',type:'s'}],
 
-	[{text:'ängstlich', type:'s'}, {text:'aggresiv',type:'m'}],
+	[{text:'ängstlich', type:'s'}, {text:'aggressiv',type:'m'}],
 	[{text:'nutzenorientiert (pragmatisch)', type:'m'},{text:'problemorientiert',type:'i'}],
-	[{text:'umfassend informiert', type:'si'},{text:'tendenziös informiert',type:'m'}],
+	[{text:'umfassend informiert', type:'si'},{text:'tendenziell informiert',type:'m'}],
 
 	[{text:'sympathisch wirkend', type:'s'}, {text:'unsympathisch wirkend',type:'m'}],
 	[{text:'arrogant', type:'m'},{text:'bescheiden',type:'i'}],
@@ -180,7 +162,10 @@
 		var cell2 = row.insertCell(2);
 		
 		cell1.innerHTML = itemrow[0].text;
+		cell1.setAttribute('id', 'n'+ridx);
 		cell2.innerHTML = itemrow[1].text;
+		cell2.setAttribute('id', 'p'+ridx);
+		cell3.setAttribute('id', 'r'+ridx);
 		var htmlstr = '<table class="buttons"><tr>';
 		
 		for (var j = -3; j < 0; j++) {
@@ -210,8 +195,19 @@
 		calcResults();
 		rowId = item.dataset.row;
 		row = document.getElementById(rowId);
-		//row.addEventListener('AnimationEnd',function( event ) { row.style.display = 'none'; }, false);
-		row.classList.add('fadeRow');
+		//row.style.opacity=0.2;
+		var alpha = Math.abs(item.value)/3;
+		console.log(Math.abs(item.value),alpha)
+		if (item.value < 0) {
+			document.getElementById('n'+rowId).style.opacity=alpha;
+			
+			document.getElementById('p'+rowId).style.opacity=0.1;
+			document.getElementById('r'+rowId).style.opacity=0.1;
+		} else {
+			document.getElementById('n'+rowId).style.opacity=0.1;
+			document.getElementById('p'+rowId).style.opacity=alpha;
+			document.getElementById('r'+rowId).style.opacity=0.1;
+		}
 		checkIsDone();
 	}
 
