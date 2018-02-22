@@ -1,243 +1,223 @@
-<!DOCTYPE html>
 <html>
 <head>
 	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link href="https://fonts.googleapis.com/css?family=Libre+Baskerville" rel="stylesheet">
 	<title>Enneagram Test</title>
 	<style type="text/css">
-		body {
-			font-family: "Libre Baskerville",Georgia,serif;
-			font-size: 1.3em;
+	
+	html, body{
+		margin: 0;
+		padding: 0;
+		height: 100%;
+		font-size: 1.3rem;
+	}
+
+	main {
+		display: grid;
+		grid-auto-rows: minmax(100px,auto);
+	}
+
+	header {
+		transform: translate3d(0,0,0);
+	    text-align: center;
+	    font-size: 1.4rem;
+	    color: white;
+		overflow: hidden;
+	    background-color: #023756;
+	    position: fixed; /* Set the navbar to fixed position */
+	    top: 0; /* Position the navbar at the top of the page */
+	    width: 100%; /* Full width */
+	    z-index: 1;
+	}
+
+	main > div:nth-child(odd){
+		!background-color: #6091a21a;
+	}
+	main > div:nth-child(even){
+		background-color: #c2468f0d;
+	}
+
+	.question {
+		padding: 30px;
+	}
+
+	button {
+		width: 50px;
+		height: 40px;
+		!border-radius: 10px;
+		background-color: #88A040;
+		cursor: pointer;
+	}
+	input {
+		cursor: pointer;
+	}
+
+	@media screen and (max-width: 39.9375em) {
+		main {
+			display: grid;
+			grid-auto-rows: minmax(100px,auto);
+			font-size: 0.8rem;
 		}
-		.main {
-			display: table;
-  			margin-right: auto;
-  			margin-left: auto;
-  			box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  			overflow: hidden;
-  			margin-top: 90px;
-		}
-
-		.tab {
-			border-collapse: collapse;
-			empty-cells: hide;
-			border-bottom: 1px solid #ddd;
-			border-top: 1px solid #ddd;
-
-		}
-
-		.tab td {
-			text-align: center;
-			padding: 1.2em;
-			border-bottom: 1px solid #ddd;
-			border-top: 1px solid #ddd;
-			cursor: pointer;
-		}
-
-		.buttons td {
-			margin-right: 10px;
-		}
-
-
-		.buttons td:nth-child(4) {
-			box-shadow: inset 2px 0px 0px 0px rgba(128, 128, 128, 0.15);
-		}
-
-		.header {
-		    padding: 30px;
+		header {
+			transform: translate3d(0,0,0);
 		    text-align: center;
-		    font-size: 1.3em;
+		    font-size: 0.8rem;
 		    color: white;
 			overflow: hidden;
-		    background-color: #333;
-		    position: fixed; /* Set the navbar to fixed position */
-		    top: 0; /* Position the navbar at the top of the page */
-		    width: 100%; /* Full width */
+		    background-color: #023756;
+		    position: fixed;
+		    top: 0;
+		    width: 100%;
 		    z-index: 1;
 		}
-
-		body {
-			margin: 0;
+		.question {
+			padding: 10px;
 		}
+	}
 
-		input[type="radio"] {
-			
-  			cursor: pointer;
-		}
+	.rowgrid {
+		display: grid;
+		grid-template-columns: repeat(2,1fr);
+		grid-template-rows: repeat(3, 1fr);
+		grid-template-areas: 
+	    "a b"
+	    "c1 c2"
+	    "d1 d2";
+	}
+	.rowgrid div{
+		padding-top: 5px;
+		padding-bottom: 5px;
+	}
 
-		input[type="radio"]:checked {
-			display: none;
-		}
+	.a {
+		grid-area: a;
+		height: 85%;
+		text-align: center;
+		border-right: 1px solid #969696;
+	}
 
-		input[type="radio"] + label {
-			display: none;
-		}
+	.b {
+		grid-area: b;
+		height: 85%;
+		text-align: center;
+		border-left: 1px solid #969696;
+	}
 
-		input[type="radio"]:checked + label {
-			display: inline-block;
-			color: green;
-		}
+	.c1 {
+		grid-area: c1;
+		display: grid;
+		grid-template-columns:repeat(3,1fr);
+		justify-self: end;
+		border-right: 1px solid #969696;
+	}
 
-		@media all and (max-width: 1130px){
-			.main {
-  				margin-top: 120px;
-			}
-		}
-}
+	.c2 {
+		grid-area: c2;
+		display: grid;
+		grid-template-columns:repeat(3,1fr);
+		justify-self: start;
+		border-left: 1px solid #969696;
+	}
+
+	.d1 {
+		grid-area: d1;
+		display: grid;
+		grid-template-columns:repeat(3,1fr);
+		justify-self: end;
+		border-right: 1px solid #969696;
+	}
+
+	.d2 {
+		grid-area: d2;
+		display: grid;
+		grid-template-columns:repeat(3,1fr);
+		justify-self: start;
+		border-left: 1px solid #969696;
+	}
+	.d1, .d2 {
+		font-size: 0.5rem;
+	}
+	.d1 span, .d2 span {
+		text-align: center;
+		width: 50px;
+	}
+
 
 	</style>
-</head>
 <body>
-<div class="header">Welche Verhaltensmerkmale treffen nach Ihrem Urteil für Ihre Persönlichkeit zu?</div>
-<div class="main">
-	<table class="tab" id="t1">
-	</table>
-</div>
+<header>
+	<div class="question">Welche Verhaltensmerkmale treffen nach Ihrem Urteil für Ihre Persönlichkeit zu?</div>
+</header>
+<main>
+	<div class="rowgrid">
+		<div class="a">unfreundlich / distanziert</div>
+		<div class="b">freundlich</div>
+		<div class="c1">
+			<button onclick="this.children[0].checked=true"><input type="radio" name="1" value="-3"></button>
+			<button onclick="this.children[0].checked=true"><input type="radio" name="1" value="-2"></button>
+			<button onclick="this.children[0].checked=true"><input type="radio" name="1" value="-1"></button>
+		</div>
+		<div class="c2">
+			<button onclick="this.children[0].checked=true"><input type="radio" name="1" value="1"></button>
+			<button onclick="this.children[0].checked=true"><input type="radio" name="1" value="2"></button>
+			<button onclick="this.children[0].checked=true"><input type="radio" name="1" value="3"></button>
+		</div>
+		<div class="d1"><span>sehr</span><span>ziemlich</span><span>eher</span></div>
+		<div class="d2"><span>eher</span><span>ziemlich</span><span>sehr</span></div>
+	</div>
+	<div class="rowgrid">
+		<div class="a">unfreundlich / distanziert</div>
+		<div class="b">freundlich</div>
+		<div class="c1">
+			<button onclick="this.children[0].checked=true"><input type="radio" name="1" value="-3"></button>
+			<button onclick="this.children[0].checked=true"><input type="radio" name="1" value="-2"></button>
+			<button onclick="this.children[0].checked=true"><input type="radio" name="1" value="-1"></button>
+		</div>
+		<div class="c2">
+			<button onclick="this.children[0].checked=true"><input type="radio" name="1" value="1"></button>
+			<button onclick="this.children[0].checked=true"><input type="radio" name="1" value="2"></button>
+			<button onclick="this.children[0].checked=true"><input type="radio" name="1" value="3"></button>
+		</div>
+		<div class="d1"><span>sehr</span><span>ziemlich</span><span>eher</span></div>
+		<div class="d2"><span>eher</span><span>ziemlich</span><span>sehr</span></div>
+	</div>
+	<div class="rowgrid">
+		<div class="a">unfreundlich / distanziert</div>
+		<div class="b">freundlich</div>
+		<div class="c1">
+			<button onclick="this.children[0].checked=true"><input type="radio" name="1" value="-3"></button>
+			<button onclick="this.children[0].checked=true"><input type="radio" name="1" value="-2"></button>
+			<button onclick="this.children[0].checked=true"><input type="radio" name="1" value="-1"></button>
+		</div>
+		<div class="c2">
+			<button onclick="this.children[0].checked=true"><input type="radio" name="1" value="1"></button>
+			<button onclick="this.children[0].checked=true"><input type="radio" name="1" value="2"></button>
+			<button onclick="this.children[0].checked=true"><input type="radio" name="1" value="3"></button>
+		</div>
+		<div class="d1"><span>sehr</span><span>ziemlich</span><span>eher</span></div>
+		<div class="d2"><span>eher</span><span>ziemlich</span><span>sehr</span></div>
+	</div>
+	<div>Row 2</div>
+	<div>Row 3</div>
+</main>
 
-	<table id="2">
-	</table>
-	<table id="3">
-	</table>
+<script>
 
-<script type="text/javascript">
-	var items = [
-	[{text:'offensiv', type:'m'}, {text:'zurückhaltend',type:'i'}],
-	[{text:'engagiert', type:'ms'},{text:'abwartend',type:'i'}],
-	[{text:'unfreundlich/distanziert', type:'i'},{text:'freundlich',type:'s'}],
+	// set top margin of the main grid based on the actual header size
+	var header = document.querySelector('header');
+	var main = document.querySelector('main');
+	var headerHeight = header.offsetHeight;
+	main.style.marginTop = headerHeight;
+	window.addEventListener('resize', function(){
+		var newHeight = header.offsetHeight;
+		if (newHeight == headerHeight) return;
+		headerHeight = newHeight;
+		main.style.marginTop = headerHeight;
+	});
 
-	[{text:'mitteilsam/redselig', type:'s'}, {text:'verschlossen',type:'i'}],
-	[{text:'offen (intellektuell, emotional)', type:'msi'},{text:'skeptisch',type:'i'}],
-	[{text:'ruhig/besonnen', type:'i'},{text:'quirlig/spontan',type:'s'}],
 
-	[{text:'assoziativ', type:'s'}, {text:'systematisch',type:'i'}],
-	[{text:'wortkarg', type:'i'},{text:'redegewandt',type:'ms'}],
-	[{text:'konzentriert', type:'i'},{text:'leicht ablenkbar',type:'s'}],
-
-	[{text:'ängstlich', type:'s'}, {text:'aggressiv',type:'m'}],
-	[{text:'nutzenorientiert (pragmatisch)', type:'m'},{text:'problemorientiert',type:'i'}],
-	[{text:'umfassend informiert', type:'si'},{text:'tendenziell informiert',type:'m'}],
-
-	[{text:'sympathisch wirkend', type:'s'}, {text:'unsympathisch wirkend',type:'m'}],
-	[{text:'arrogant', type:'m'},{text:'bescheiden',type:'i'}],
-	[{text:'fordernd', type:'m'},{text:'zurückhaltend',type:'i'}],
-
-	[{text:'spontan', type:'ms'}, {text:'abwägend',type:'i'}],
-	[{text:'abwägend urteilend', type:'i'},{text:'spontan urteilend',type:'ms'}],
-	[{text:'pragmatisch orientiert', type:'ms'},{text:'prinzipiell orientiert',type:'i'}],
-
-	[{text:'durchsetzend', type:'mi'}, {text:'vermittelnd',type:'si'}],
-	[{text:'rendend', type:'s'},{text:'zuhörend',type:'si'}],
-	[{text:'belehrend', type:'m'},{text:'beratend',type:'i'}],
-
-	[{text:'interessiert', type:'msi'}, {text:'gleichgültig',type:'mi'}],
-	[{text:'flexibel', type:'s'},{text:'beharrend/starr',type:'m'}],
-	[{text:'zielstrebig', type:'mi'},{text:'abschweifend',type:'s'}],
-
-	[{text:'personenorientiert', type:'ms'}, {text:'sachorientiert',type:'i'}],
-	[{text:'integrierend', type:'s'},{text:'polarisierend',type:'m'}],
-	[{text:'beherrschend', type:'m'},{text:'sich einfügend',type:'s'}],
-
-	[{text:'optimistisch', type:'ms'}, {text:'pessimistisch',type:'i'}],
-	[{text:'nachsichtig', type:'s'},{text:'fordernd',type:'m'}],
-	[{text:'zögernd', type:'i'},{text:'entschlossen',type:'m'}],
-	];
-
-	var table = document.getElementById('t1');
-	var ridx = 0;
-	for (var i = 0; i < items.length; i++) {
-		var itemrow = items[i];
-
-		if (false && i % 3 == 0 && i > 0) {
-			// empty row after every 3rd item
-			var row = table.insertRow(ridx++);
-
-			var cell1 = row.insertCell(0);
-			var cell3 = row.insertCell(1);
-			var cell2 = row.insertCell(2);
-		}
-		var row = table.insertRow(ridx++);
-		row.setAttribute('id', ridx);
-		var cell1 = row.insertCell(0);
-		var cell3 = row.insertCell(1);
-		var cell2 = row.insertCell(2);
-		
-		cell1.innerHTML = itemrow[0].text;
-		cell1.setAttribute('id', 'n'+ridx);
-		cell2.innerHTML = itemrow[1].text;
-		cell2.setAttribute('id', 'p'+ridx);
-		cell3.setAttribute('id', 'r'+ridx);
-		var htmlstr = '<table class="buttons"><tr>';
-		
-		for (var j = -3; j < 0; j++) {
-			htmlstr += '<td onclick="tickItem(this.children[0])"><input data-row='+ridx+' type=radio name='+i+' value='+j+' "><label>&#10004;</label></td>';
-		}
 	
-
-		for (var j = 1; j < 4; j++) {
-			htmlstr += '<td onclick="tickItem(this.children[0])"><input data-row='+ridx+' type=radio name='+i+' value='+j+' "><label>&#10004;</label></td>';
-		}
-		htmlstr += '</tr></table>';
-
-		cell3.innerHTML = htmlstr;
-		
-	};
-
-	var glValues = {m:0,s:0,i:0};
-	var glAnswers= {tab1:[], tab2:[], tab3:[], tab4:[]};
-
-	function tickItem(item){
-		//console.log('item checked', item.checked);
-		item.checked = true;
-		var itemID = item.name;
-		var answerItem = items[itemID][(item.value<0)?0:1];
-		glAnswers.tab1[itemID] = [answerItem,item.value];
-		//console.log(glAnswers);
-		calcResults();
-		rowId = item.dataset.row;
-		row = document.getElementById(rowId);
-		//row.style.opacity=0.2;
-		var alpha = Math.abs(item.value)/3;
-		console.log(Math.abs(item.value),alpha)
-		if (item.value < 0) {
-			document.getElementById('n'+rowId).style.opacity=alpha;
-			
-			document.getElementById('p'+rowId).style.opacity=0.1;
-			document.getElementById('r'+rowId).style.opacity=0.1;
-		} else {
-			document.getElementById('n'+rowId).style.opacity=0.1;
-			document.getElementById('p'+rowId).style.opacity=alpha;
-			document.getElementById('r'+rowId).style.opacity=0.1;
-		}
-		checkIsDone();
-	}
-
-	function calcResults() {
-		glValues = {m:0,s:0,i:0};
-		for (var i = glAnswers.tab1.length - 1; i >= 0; i--) {
-			if (glAnswers.tab1[i] === undefined){
-				continue;
-			}
-			var item = glAnswers.tab1[i];
-			var typeString = item[0].type;
-			var value = item[1];
-			for (var j = typeString.length - 1; j >= 0; j--) {
-				if (typeString[j] == 'i')
-					glValues.i += Math.abs(value);
-				if (typeString[j] == 'm')
-					glValues.m += Math.abs(value);
-				if (typeString[j] == 's')
-					glValues.s += Math.abs(value);
-			}
-		};
-		console.log(glValues);
-	}
-	
-	function checkIsDone () {
-		var finishedItems = glAnswers.tab1.length;
-		console.log('finished', finishedItems == items.length);
-
-	}
 </script>
-
 </body>
 </html>
