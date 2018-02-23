@@ -31,9 +31,6 @@
 	    z-index: 1;
 	}
 
-	main > div:nth-child(odd){
-		!background-color: #6091a21a;
-	}
 	main > div:nth-child(even){
 		background-color: #c2468f0d;
 	}
@@ -49,6 +46,22 @@
 		background-color: #88A040;
 		cursor: pointer;
 	}
+
+	.buttonstart{
+		border-top-left-radius:18px;
+		border-bottom-left-radius:18px;
+		width: 55px;
+	}
+
+	.buttonend{
+		border-top-right-radius:18px;
+		border-bottom-right-radius:18px;
+		width: 55px;
+	}
+
+	span {
+		color: #00000050;
+	}
 	input {
 		cursor: pointer;
 	}
@@ -57,12 +70,12 @@
 		main {
 			display: grid;
 			grid-auto-rows: minmax(100px,auto);
-			font-size: 0.8rem;
+			font-size: 0.7rem;
 		}
 		header {
 			transform: translate3d(0,0,0);
 		    text-align: center;
-		    font-size: 0.8rem;
+		    font-size: 0.7rem;
 		    color: white;
 			overflow: hidden;
 		    background-color: #023756;
@@ -86,7 +99,6 @@
 	    "d1 d2";
 	}
 	.rowgrid div{
-		padding-top: 5px;
 		padding-bottom: 5px;
 	}
 
@@ -94,30 +106,33 @@
 		grid-area: a;
 		height: 85%;
 		text-align: center;
-		border-right: 1px solid #969696;
+		border-right: 1px dotted #dad9d9;
 	}
 
 	.b {
 		grid-area: b;
 		height: 85%;
 		text-align: center;
-		border-left: 1px solid #969696;
+	}
+
+	.a, .b {
+		padding-top: 15px;
+		padding-right: 5px;
+		padding-left: 5px;
 	}
 
 	.c1 {
 		grid-area: c1;
 		display: grid;
-		grid-template-columns:repeat(3,1fr);
+		grid-template-columns:repeat(3,min-content);
 		justify-self: end;
-		border-right: 1px solid #969696;
 	}
 
 	.c2 {
 		grid-area: c2;
 		display: grid;
-		grid-template-columns:repeat(3,1fr);
+		grid-template-columns:repeat(3,min-content);
 		justify-self: start;
-		border-left: 1px solid #969696;
 	}
 
 	.d1 {
@@ -125,7 +140,7 @@
 		display: grid;
 		grid-template-columns:repeat(3,1fr);
 		justify-self: end;
-		border-right: 1px solid #969696;
+		!border-right: 1px dotted #969696;
 	}
 
 	.d2 {
@@ -133,7 +148,7 @@
 		display: grid;
 		grid-template-columns:repeat(3,1fr);
 		justify-self: start;
-		border-left: 1px solid #969696;
+		!border-left: 1px dotted #969696;
 	}
 	.d1, .d2 {
 		font-size: 0.5rem;
@@ -154,14 +169,14 @@
 		<div class="a">unfreundlich / distanziert</div>
 		<div class="b">freundlich</div>
 		<div class="c1">
-			<button onclick="this.children[0].checked=true"><input type="radio" name="1" value="-3"></button>
-			<button onclick="this.children[0].checked=true"><input type="radio" name="1" value="-2"></button>
-			<button onclick="this.children[0].checked=true"><input type="radio" name="1" value="-1"></button>
+			<button class="buttonstart" onclick="tick(this.children[0],this)"><input type="radio" name="1" value="-3"></button>
+			<button onclick="tick(this.children[0],this)"><input type="radio" name="1" value="-2"></button>
+			<button onclick="tick(this.children[0],this)"><input type="radio" name="1" value="-1"></button>
 		</div>
 		<div class="c2">
-			<button onclick="this.children[0].checked=true"><input type="radio" name="1" value="1"></button>
-			<button onclick="this.children[0].checked=true"><input type="radio" name="1" value="2"></button>
-			<button onclick="this.children[0].checked=true"><input type="radio" name="1" value="3"></button>
+			<button onclick="tick(this.children[0],this)"><input type="radio" name="1" value="1"></button>
+			<button onclick="tick(this.children[0],this)"><input type="radio" name="1" value="2"></button>
+			<button class="buttonend" onclick="tick(this.children[0],this)"><input type="radio" name="1" value="3"></button>
 		</div>
 		<div class="d1"><span>sehr</span><span>ziemlich</span><span>eher</span></div>
 		<div class="d2"><span>eher</span><span>ziemlich</span><span>sehr</span></div>
@@ -170,14 +185,14 @@
 		<div class="a">unfreundlich / distanziert</div>
 		<div class="b">freundlich</div>
 		<div class="c1">
-			<button onclick="this.children[0].checked=true"><input type="radio" name="1" value="-3"></button>
-			<button onclick="this.children[0].checked=true"><input type="radio" name="1" value="-2"></button>
-			<button onclick="this.children[0].checked=true"><input type="radio" name="1" value="-1"></button>
+			<button class="buttonstart" onclick="tick(this.children[0],this)"><input type="radio" name="2" value="-3"></button>
+			<button onclick="tick(this.children[0],this)"><input type="radio" name="2" value="-2"></button>
+			<button onclick="tick(this.children[0],this)"><input type="radio" name="2" value="-1"></button>
 		</div>
 		<div class="c2">
-			<button onclick="this.children[0].checked=true"><input type="radio" name="1" value="1"></button>
-			<button onclick="this.children[0].checked=true"><input type="radio" name="1" value="2"></button>
-			<button onclick="this.children[0].checked=true"><input type="radio" name="1" value="3"></button>
+			<button onclick="tick(this.children[0],this)"><input type="radio" name="2" value="1"></button>
+			<button onclick="tick(this.children[0],this)"><input type="radio" name="2" value="2"></button>
+			<button class="buttonend" onclick="tick(this.children[0],this)"><input type="radio" name="2" value="3"></button>
 		</div>
 		<div class="d1"><span>sehr</span><span>ziemlich</span><span>eher</span></div>
 		<div class="d2"><span>eher</span><span>ziemlich</span><span>sehr</span></div>
@@ -186,14 +201,14 @@
 		<div class="a">unfreundlich / distanziert</div>
 		<div class="b">freundlich</div>
 		<div class="c1">
-			<button onclick="this.children[0].checked=true"><input type="radio" name="1" value="-3"></button>
-			<button onclick="this.children[0].checked=true"><input type="radio" name="1" value="-2"></button>
-			<button onclick="this.children[0].checked=true"><input type="radio" name="1" value="-1"></button>
+			<button class="buttonstart" onclick="tick(this.children[0],this)"><input type="radio" name="3" value="-3"></button>
+			<button onclick="tick(this.children[0],this)"><input type="radio" name="3" value="-2"></button>
+			<button onclick="tick(this.children[0],this)"><input type="radio" name="3" value="-1"></button>
 		</div>
 		<div class="c2">
-			<button onclick="this.children[0].checked=true"><input type="radio" name="1" value="1"></button>
-			<button onclick="this.children[0].checked=true"><input type="radio" name="1" value="2"></button>
-			<button onclick="this.children[0].checked=true"><input type="radio" name="1" value="3"></button>
+			<button onclick="tick(this.children[0],this)"><input type="radio" name="3" value="1"></button>
+			<button onclick="tick(this.children[0],this)"><input type="radio" name="3" value="2"></button>
+			<button class="buttonend" onclick="tick(this.children[0],this)"><input type="radio" name="3" value="3"></button>
 		</div>
 		<div class="d1"><span>sehr</span><span>ziemlich</span><span>eher</span></div>
 		<div class="d2"><span>eher</span><span>ziemlich</span><span>sehr</span></div>
@@ -216,7 +231,11 @@
 		main.style.marginTop = headerHeight;
 	});
 
-
+	function tick(radio,parent){
+		radio.checked = true;
+		parent.parentNode.parentNode.querySelectorAll('button').forEach(function(elem){elem.style.backgroundColor='#88A040'})
+		parent.style.backgroundColor='#6091A2';
+	}
 	
 </script>
 </body>
