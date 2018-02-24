@@ -158,6 +158,16 @@
 		width: 50px;
 	}
 
+	#next {
+		display: none;
+		width: 100%;
+		height: 100%;
+		align-self: stretch;
+		justify-content: center;
+		color: white;
+		font-size: 1rem;
+	}
+
 
 	</style>
 <body>
@@ -165,59 +175,62 @@
 	<div class="question">Welche Verhaltensmerkmale treffen nach Ihrem Urteil für Ihre Persönlichkeit zu?</div>
 </header>
 <main>
-	<div class="rowgrid">
-		<div class="a">unfreundlich / distanziert</div>
-		<div class="b">freundlich</div>
-		<div class="c1">
-			<button class="buttonstart" onclick="tick(this.children[0],this)"><input type="radio" name="1" value="-3"></button>
-			<button onclick="tick(this.children[0],this)"><input type="radio" name="1" value="-2"></button>
-			<button onclick="tick(this.children[0],this)"><input type="radio" name="1" value="-1"></button>
-		</div>
-		<div class="c2">
-			<button onclick="tick(this.children[0],this)"><input type="radio" name="1" value="1"></button>
-			<button onclick="tick(this.children[0],this)"><input type="radio" name="1" value="2"></button>
-			<button class="buttonend" onclick="tick(this.children[0],this)"><input type="radio" name="1" value="3"></button>
-		</div>
-		<div class="d1"><span>sehr</span><span>ziemlich</span><span>eher</span></div>
-		<div class="d2"><span>eher</span><span>ziemlich</span><span>sehr</span></div>
-	</div>
-	<div class="rowgrid">
-		<div class="a">unfreundlich / distanziert</div>
-		<div class="b">freundlich</div>
-		<div class="c1">
-			<button class="buttonstart" onclick="tick(this.children[0],this)"><input type="radio" name="2" value="-3"></button>
-			<button onclick="tick(this.children[0],this)"><input type="radio" name="2" value="-2"></button>
-			<button onclick="tick(this.children[0],this)"><input type="radio" name="2" value="-1"></button>
-		</div>
-		<div class="c2">
-			<button onclick="tick(this.children[0],this)"><input type="radio" name="2" value="1"></button>
-			<button onclick="tick(this.children[0],this)"><input type="radio" name="2" value="2"></button>
-			<button class="buttonend" onclick="tick(this.children[0],this)"><input type="radio" name="2" value="3"></button>
-		</div>
-		<div class="d1"><span>sehr</span><span>ziemlich</span><span>eher</span></div>
-		<div class="d2"><span>eher</span><span>ziemlich</span><span>sehr</span></div>
-	</div>
-	<div class="rowgrid">
-		<div class="a">unfreundlich / distanziert</div>
-		<div class="b">freundlich</div>
-		<div class="c1">
-			<button class="buttonstart" onclick="tick(this.children[0],this)"><input type="radio" name="3" value="-3"></button>
-			<button onclick="tick(this.children[0],this)"><input type="radio" name="3" value="-2"></button>
-			<button onclick="tick(this.children[0],this)"><input type="radio" name="3" value="-1"></button>
-		</div>
-		<div class="c2">
-			<button onclick="tick(this.children[0],this)"><input type="radio" name="3" value="1"></button>
-			<button onclick="tick(this.children[0],this)"><input type="radio" name="3" value="2"></button>
-			<button class="buttonend" onclick="tick(this.children[0],this)"><input type="radio" name="3" value="3"></button>
-		</div>
-		<div class="d1"><span>sehr</span><span>ziemlich</span><span>eher</span></div>
-		<div class="d2"><span>eher</span><span>ziemlich</span><span>sehr</span></div>
-	</div>
-	<div>Row 2</div>
-	<div>Row 3</div>
+	<button id='next'>weiter</button>
 </main>
 
+<script id='rowTemplate' type="template">
+	<div class="rowgrid">
+		<div class="a">{left}</div>
+		<div class="b">{right}</div>
+		<div class="c1">
+			<button class="buttonstart" onclick="tick(this.children[0],this)"><input type="radio" name="{radioName}" value="-3"></button>
+			<button onclick="tick(this.children[0],this)"><input type="radio" name="{radioName}" value="-2"></button>
+			<button onclick="tick(this.children[0],this)"><input type="radio" name="{radioName}" value="-1"></button>
+		</div>
+		<div class="c2">
+			<button onclick="tick(this.children[0],this)"><input type="radio" name="{radioName}" value="1"></button>
+			<button onclick="tick(this.children[0],this)"><input type="radio" name="{radioName}" value="2"></button>
+			<button class="buttonend" onclick="tick(this.children[0],this)"><input type="radio" name="{radioName}" value="3"></button>
+		</div>
+		<div class="d1"><span>sehr</span><span>ziemlich</span><span>eher</span></div>
+		<div class="d2"><span>eher</span><span>ziemlich</span><span>sehr</span></div>
+	</div>
+</script>
+	
 <script>
+	var items = [
+		[{text:'offensiv', type:'m'}, {text:'zurückhaltend',type:'i'}],
+		[{text:'engagiert', type:'ms'},{text:'abwartend',type:'i'}],
+		[{text:'unfreundlich/distanziert', type:'i'},{text:'freundlich',type:'s'}],
+		[{text:'mitteilsam/redselig', type:'s'}, {text:'verschlossen',type:'i'}],
+		[{text:'offen (intellektuell, emotional)', type:'msi'},{text:'skeptisch',type:'i'}],
+		[{text:'ruhig/besonnen', type:'i'},{text:'quirlig/spontan',type:'s'}],
+		[{text:'assoziativ', type:'s'}, {text:'systematisch',type:'i'}],
+		[{text:'wortkarg', type:'i'},{text:'redegewandt',type:'ms'}],
+		[{text:'konzentriert', type:'i'},{text:'leicht ablenkbar',type:'s'}],
+		[{text:'ängstlich', type:'s'}, {text:'aggressiv',type:'m'}],
+		[{text:'nutzenorientiert (pragmatisch)', type:'m'},{text:'problemorientiert',type:'i'}],
+		[{text:'umfassend informiert', type:'si'},{text:'tendenziell informiert',type:'m'}],
+		[{text:'sympathisch wirkend', type:'s'}, {text:'unsympathisch wirkend',type:'m'}],
+		[{text:'arrogant', type:'m'},{text:'bescheiden',type:'i'}],
+		[{text:'fordernd', type:'m'},{text:'zurückhaltend',type:'i'}],
+		[{text:'spontan', type:'ms'}, {text:'abwägend',type:'i'}],
+		[{text:'abwägend urteilend', type:'i'},{text:'spontan urteilend',type:'ms'}],
+		[{text:'pragmatisch orientiert', type:'ms'},{text:'prinzipiell orientiert',type:'i'}],
+		[{text:'durchsetzend', type:'mi'}, {text:'vermittelnd',type:'si'}],
+		[{text:'rendend', type:'s'},{text:'zuhörend',type:'si'}],
+		[{text:'belehrend', type:'m'},{text:'beratend',type:'i'}],
+		[{text:'interessiert', type:'msi'}, {text:'gleichgültig',type:'mi'}],
+		[{text:'flexibel', type:'s'},{text:'beharrend/starr',type:'m'}],
+		[{text:'zielstrebig', type:'mi'},{text:'abschweifend',type:'s'}],
+		[{text:'personenorientiert', type:'ms'}, {text:'sachorientiert',type:'i'}],
+		[{text:'integrierend', type:'s'},{text:'polarisierend',type:'m'}],
+		[{text:'beherrschend', type:'m'},{text:'sich einfügend',type:'s'}],
+		[{text:'optimistisch', type:'ms'}, {text:'pessimistisch',type:'i'}],
+		[{text:'nachsichtig', type:'s'},{text:'fordernd',type:'m'}],
+		[{text:'zögernd', type:'i'},{text:'entschlossen',type:'m'}],
+		];
+
 
 	// set top margin of the main grid based on the actual header size
 	var header = document.querySelector('header');
@@ -231,12 +244,65 @@
 		main.style.marginTop = headerHeight;
 	});
 
+	// render questions
+	var template = document.getElementById('rowTemplate').text.trim();
+	var rows = '';
+	for (var i = 0; i < items.length; i++) {
+		var itemrow = items[i];
+		var left = itemrow[0].text;
+		var right = itemrow[1].text;
+		rows += template.replace(/{left}/,left).replace(/{right}/,right).replace(/{radioName}/g,i);
+	}
+	main.innerHTML = rows + main.innerHTML;
+
+	var glValues = {m:0,s:0,i:0};
+	var glAnswers= {tab1:[], tab2:[], tab3:[], tab4:[]};
+	var numAnswered=0;
+
 	function tick(radio,parent){
 		radio.checked = true;
 		parent.parentNode.parentNode.querySelectorAll('button').forEach(function(elem){elem.style.backgroundColor='#88A040'})
 		parent.style.backgroundColor='#6091A2';
+
+		var itemID = radio.name;
+		var answerItem = items[itemID][(radio.value<0)?0:1];
+		glAnswers.tab1[itemID] = [answerItem,radio.value];
+		numAnswered++;
+		calcResults();
+		checkIsDone();
 	}
 	
+	function calcResults() {
+		glValues = {m:0,s:0,i:0};
+		for (var i = glAnswers.tab1.length - 1; i >= 0; i--) {
+			if (glAnswers.tab1[i] === undefined){
+				continue;
+			}
+			var item = glAnswers.tab1[i];
+			var typeString = item[0].type;
+			var value = item[1];
+			for (var j = typeString.length - 1; j >= 0; j--) {
+				if (typeString[j] == 'i')
+					glValues.i += Math.abs(value);
+				if (typeString[j] == 'm')
+					glValues.m += Math.abs(value);
+				if (typeString[j] == 's')
+					glValues.s += Math.abs(value);
+			}
+		};
+		//console.log(glValues);
+	}
+	
+	function checkIsDone () {
+		if (numAnswered == items.length){
+			var next = document.getElementById('next');
+			next.style.display="block";
+			next.scrollIntoView();
+		}
+	}
+
+	
+
 </script>
 </body>
 </html>
