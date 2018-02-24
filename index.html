@@ -10,7 +10,7 @@
 		margin: 0;
 		padding: 0;
 		height: 100%;
-		font-size: 1.3rem;
+		font-size: 1.2rem;
 	}
 
 	main {
@@ -66,59 +66,29 @@
 		cursor: pointer;
 	}
 
-	@media screen and (max-width: 39.9375em) {
-		main {
-			display: grid;
-			grid-auto-rows: minmax(100px,auto);
-			font-size: 0.7rem;
-		}
-		header {
-			transform: translate3d(0,0,0);
-		    text-align: center;
-		    font-size: 0.7rem;
-		    color: white;
-			overflow: hidden;
-		    background-color: #023756;
-		    position: fixed;
-		    top: 0;
-		    width: 100%;
-		    z-index: 1;
-		}
-		.question {
-			padding: 10px;
-		}
-	}
-
 	.rowgrid {
 		display: grid;
-		grid-template-columns: repeat(2,1fr);
+		grid-template-columns: 20% repeat(4,1fr) 20%;
 		grid-template-rows: repeat(3, 1fr);
 		grid-template-areas: 
-	    "a b"
-	    "c1 c2"
-	    "d1 d2";
-	}
-	.rowgrid div{
-		padding-bottom: 5px;
+	    ". . . . . ."
+	    "a a c1 c2 b b"
+	    ". . d1 d2 . .";
 	}
 
 	.a {
 		grid-area: a;
-		height: 85%;
-		text-align: center;
-		border-right: 1px dotted #dad9d9;
+		text-align: end;
+		padding-right: 8px;
 	}
 
 	.b {
 		grid-area: b;
-		height: 85%;
-		text-align: center;
+		padding-left: 8px;
 	}
 
 	.a, .b {
-		padding-top: 15px;
-		padding-right: 5px;
-		padding-left: 5px;
+		align-self: center;
 	}
 
 	.c1 {
@@ -126,6 +96,7 @@
 		display: grid;
 		grid-template-columns:repeat(3,min-content);
 		justify-self: end;
+		align-self: center;
 	}
 
 	.c2 {
@@ -133,6 +104,7 @@
 		display: grid;
 		grid-template-columns:repeat(3,min-content);
 		justify-self: start;
+		align-self: center;
 	}
 
 	.d1 {
@@ -140,7 +112,6 @@
 		display: grid;
 		grid-template-columns:repeat(3,1fr);
 		justify-self: end;
-		!border-right: 1px dotted #969696;
 	}
 
 	.d2 {
@@ -148,10 +119,9 @@
 		display: grid;
 		grid-template-columns:repeat(3,1fr);
 		justify-self: start;
-		!border-left: 1px dotted #969696;
 	}
 	.d1, .d2 {
-		font-size: 0.5rem;
+		font-size: 0.6rem;
 	}
 	.d1 span, .d2 span {
 		text-align: center;
@@ -168,11 +138,84 @@
 		font-size: 1rem;
 	}
 
+	@media screen and (max-width: 39.9375em) {
+		html, body{
+			margin: 0;
+			padding: 0;
+			height: 100%;
+			font-size: 1.2rem;
+		}
+		main {
+			display: grid;
+			grid-auto-rows: minmax(100px,auto);
+			font-size: 0.7rem;
+		}
+		header {
+			transform: translate3d(0,0,0);
+		    text-align: center;
+		    font-size: 0.8rem;
+		    color: white;
+			overflow: hidden;
+		    background-color: #023756;
+		    position: fixed;
+		    top: 0;
+		    width: 100%;
+		    z-index: 1;
+		}
+		.question {
+			padding: 10px;
+		}
+
+		.rowgrid {
+			display: grid;
+			grid-template-columns: repeat(2,1fr);
+			grid-template-rows: repeat(3, 1fr);
+			grid-template-areas: 
+		    "a b"
+		    "c1 c2"
+		    "d1 d2";
+		}
+
+		.a {
+			grid-area: a;
+			height: 85%;
+			text-align: center;
+			border-right: 1px dotted #dad9d9;
+		}
+
+		.b {
+			grid-area: b;
+			height: 85%;
+			text-align: center;
+		}
+		.a, .b {
+			padding-top: 15px;
+			padding-right: 5px;
+			padding-left: 5px;
+		}
+		.c1 {
+			grid-area: c1;
+			display: grid;
+			grid-template-columns:repeat(3,min-content);
+			justify-self: end;
+		}
+
+		.c2 {
+			grid-area: c2;
+			display: grid;
+			grid-template-columns:repeat(3,min-content);
+			justify-self: start;
+		}
+
+		.d1, .d2 {
+			font-size: 0.5rem;
+		}
+	}
 
 	</style>
 <body>
 <header>
-	<div class="question">Welche Verhaltensmerkmale treffen nach Ihrem Urteil für Ihre Persönlichkeit zu?</div>
+	<div class="question">Welche Verhaltensmerkmale treffen nach Ihrem Urteil für <u>Ihre Persönlichkeit</u> zu?</div>
 </header>
 <main>
 	<button id='next'>weiter</button>
@@ -201,10 +244,10 @@
 	var items = [
 		[{text:'offensiv', type:'m'}, {text:'zurückhaltend',type:'i'}],
 		[{text:'engagiert', type:'ms'},{text:'abwartend',type:'i'}],
-		[{text:'unfreundlich/distanziert', type:'i'},{text:'freundlich',type:'s'}],
-		[{text:'mitteilsam/redselig', type:'s'}, {text:'verschlossen',type:'i'}],
+		[{text:'unfreundlich / distanziert', type:'i'},{text:'freundlich',type:'s'}],
+		[{text:'mitteilsam / redselig', type:'s'}, {text:'verschlossen',type:'i'}],
 		[{text:'offen (intellektuell, emotional)', type:'msi'},{text:'skeptisch',type:'i'}],
-		[{text:'ruhig/besonnen', type:'i'},{text:'quirlig/spontan',type:'s'}],
+		[{text:'ruhig / besonnen', type:'i'},{text:'quirlig / spontan',type:'s'}],
 		[{text:'assoziativ', type:'s'}, {text:'systematisch',type:'i'}],
 		[{text:'wortkarg', type:'i'},{text:'redegewandt',type:'ms'}],
 		[{text:'konzentriert', type:'i'},{text:'leicht ablenkbar',type:'s'}],
@@ -221,7 +264,7 @@
 		[{text:'rendend', type:'s'},{text:'zuhörend',type:'si'}],
 		[{text:'belehrend', type:'m'},{text:'beratend',type:'i'}],
 		[{text:'interessiert', type:'msi'}, {text:'gleichgültig',type:'mi'}],
-		[{text:'flexibel', type:'s'},{text:'beharrend/starr',type:'m'}],
+		[{text:'flexibel', type:'s'},{text:'beharrend / starr',type:'m'}],
 		[{text:'zielstrebig', type:'mi'},{text:'abschweifend',type:'s'}],
 		[{text:'personenorientiert', type:'ms'}, {text:'sachorientiert',type:'i'}],
 		[{text:'integrierend', type:'s'},{text:'polarisierend',type:'m'}],
