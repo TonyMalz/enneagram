@@ -5,199 +5,131 @@
 	<link href="https://fonts.googleapis.com/css?family=Libre+Baskerville" rel="stylesheet">
 	<title>Enneagram Test</title>
 	<style type="text/css">
-	
-	html, body{
-		margin: 0;
-		padding: 0;
-		height: 100%;
-		font-size: 1.2rem;
-	}
-
-	main {
-		display: grid;
-		grid-auto-rows: minmax(100px,auto);
-	}
-
-	header {
-		transform: translate3d(0,0,0);
-	    text-align: center;
-	    font-size: 1.4rem;
-	    color: white;
-		overflow: hidden;
-	    background-color: #023756;
-	    position: fixed; /* Set the navbar to fixed position */
-	    top: 0; /* Position the navbar at the top of the page */
-	    width: 100%; /* Full width */
-	    z-index: 1;
-	}
-
-	main > div:nth-child(even){
-		background-color: #c2468f0d;
-	}
-
-	.question {
-		padding: 30px;
-	}
-
-	button {
-		width: 50px;
-		height: 40px;
-		!border-radius: 10px;
-		background-color: #88A040;
-		cursor: pointer;
-	}
-
-	.buttonstart{
-		border-top-left-radius:18px;
-		border-bottom-left-radius:18px;
-		width: 55px;
-	}
-
-	.buttonend{
-		border-top-right-radius:18px;
-		border-bottom-right-radius:18px;
-		width: 55px;
-	}
-
-	span {
-		color: #00000050;
-	}
-	input {
-		cursor: pointer;
-	}
-
-	.rowgrid {
-		display: grid;
-		grid-template-columns: 20% repeat(4,1fr) 20%;
-		grid-template-rows: repeat(3, 1fr);
-		grid-template-areas: 
-	    ". . . . . ."
-	    "a a c1 c2 b b"
-	    ". . d1 d2 . .";
-	}
-
-	.a {
-		grid-area: a;
-		text-align: end;
-		padding-right: 8px;
-	}
-
-	.b {
-		grid-area: b;
-		padding-left: 8px;
-	}
-
-	.a, .b {
-		align-self: center;
-	}
-
-	.c1 {
-		grid-area: c1;
-		display: grid;
-		grid-template-columns:repeat(3,min-content);
-		justify-self: end;
-		align-self: center;
-	}
-
-	.c2 {
-		grid-area: c2;
-		display: grid;
-		grid-template-columns:repeat(3,min-content);
-		justify-self: start;
-		align-self: center;
-	}
-
-	.d1 {
-		grid-area: d1;
-		display: grid;
-		grid-template-columns:repeat(3,1fr);
-		justify-self: end;
-	}
-
-	.d2 {
-		grid-area: d2;
-		display: grid;
-		grid-template-columns:repeat(3,1fr);
-		justify-self: start;
-	}
-	.d1, .d2 {
-		font-size: 0.6rem;
-	}
-	.d1 span, .d2 span {
-		text-align: center;
-		width: 50px;
-	}
-
-	#next {
-		display: none;
-		width: 100%;
-		height: 100%;
-		align-self: stretch;
-		justify-content: center;
-		color: white;
-		font-size: 1rem;
-	}
-
-	@media screen and (max-width: 39.9375em) {
 		html, body{
 			margin: 0;
 			padding: 0;
 			height: 100%;
 			font-size: 1.2rem;
 		}
+
 		main {
 			display: grid;
 			grid-auto-rows: minmax(100px,auto);
-			font-size: 0.7rem;
 		}
+
 		header {
 			transform: translate3d(0,0,0);
 		    text-align: center;
-		    font-size: 0.7rem;
+		    font-size: 1.4rem;
 		    color: white;
 			overflow: hidden;
 		    background-color: #023756;
-		    position: fixed;
-		    top: 0;
-		    width: 100%;
+		    position: fixed; /* Set the navbar to fixed position */
+		    top: 0; /* Position the navbar at the top of the page */
+		    width: 100%; /* Full width */
 		    z-index: 1;
 		}
-		.question {
-			padding: 10px;
+
+		main > div:nth-child(even){
+			background-color: #c2468f0d;
+		}
+
+		#question {
+			padding: 30px;
+		}
+
+		button {
+			width: 50px;
+			height: 40px;
+			background-color: #88A040;
+			cursor: pointer;
+		}
+
+		.buttonstart{
+			border-top-left-radius:18px;
+			border-bottom-left-radius:18px;
+			width: 55px;
+		}
+
+		.buttonend{
+			border-top-right-radius:18px;
+			border-bottom-right-radius:18px;
+			width: 55px;
+		}
+
+		span {
+			color: #00000050;
+		}
+		input {
+			cursor: pointer;
 		}
 
 		.rowgrid {
 			display: grid;
-			grid-template-columns: repeat(2,1fr);
+			grid-template-columns: 20% repeat(4,1fr) 20%;
 			grid-template-rows: repeat(3, 1fr);
 			grid-template-areas: 
-		    "a b"
-		    "c1 c2"
-		    "d1 d2";
+		    ". . . . . ."
+		    "a a c1 c2 b b"
+		    ". . d1 d2 . .";
+		}
+
+		.rowgrid2 {
+			display: grid;
+			!grid-template-columns: 1fr min-content, min-content, 1fr;
+			grid-template-rows: repeat(4, 1fr);
+			grid-template-areas: 
+		    ". . . . "
+		    ". e f ."
+		    ". g h ."
+		    ". . . .";
+		}
+
+		.e {
+			grid-area: e;
+			align-self: center;
+			justify-self: center;
+		}
+
+		.f {
+			grid-area: f;
+			align-self: center;
+			justify-self: center;
+		}
+
+		.g {
+			grid-area: g;
+			align-self: center;
+			justify-self: center;
+		}
+
+		.h {
+			grid-area: h;
+			align-self: center;
+			justify-self: center;
 		}
 
 		.a {
 			grid-area: a;
-			height: 85%;
-			text-align: center;
-			border-right: 1px dotted #dad9d9;
+			text-align: end;
+			padding-right: 8px;
 		}
 
 		.b {
 			grid-area: b;
-			height: 85%;
-			text-align: center;
+			padding-left: 8px;
 		}
+
 		.a, .b {
-			padding-top: 15px;
-			padding-right: 5px;
-			padding-left: 5px;
+			align-self: center;
 		}
+
 		.c1 {
 			grid-area: c1;
 			display: grid;
 			grid-template-columns:repeat(3,min-content);
 			justify-self: end;
+			align-self: center;
 		}
 
 		.c2 {
@@ -205,21 +137,152 @@
 			display: grid;
 			grid-template-columns:repeat(3,min-content);
 			justify-self: start;
+			align-self: center;
 		}
 
+		.d1 {
+			grid-area: d1;
+			display: grid;
+			grid-template-columns:repeat(3,1fr);
+			justify-self: end;
+		}
+
+		.d2 {
+			grid-area: d2;
+			display: grid;
+			grid-template-columns:repeat(3,1fr);
+			justify-self: start;
+		}
 		.d1, .d2 {
-			font-size: 0.5rem;
+			font-size: 0.6rem;
 		}
-	}
+		.d1 span, .d2 span {
+			text-align: center;
+			width: 50px;
+		}
 
+		#next {
+			display: none;
+			width: 100%;
+			height: 100%;
+			align-self: stretch;
+			justify-content: center;
+			color: white;
+			font-size: 1rem;
+		}
+
+		.rate {
+			color: white;
+    		font-size: 0.8rem;
+    		background-color: #6091A2;
+		}
+
+		@media screen and (max-width: 39.9375em) {
+			html, body{
+				margin: 0;
+				padding: 0;
+				height: 100%;
+				font-size: 1.2rem;
+			}
+			main {
+				display: grid;
+				grid-auto-rows: minmax(100px,auto);
+				font-size: 0.7rem;
+			}
+			header {
+				transform: translate3d(0,0,0);
+			    text-align: center;
+			    font-size: 0.7rem;
+			    color: white;
+				overflow: hidden;
+			    background-color: #023756;
+			    position: fixed;
+			    top: 0;
+			    width: 100%;
+			    z-index: 1;
+			}
+			#question {
+				padding: 10px;
+			}
+
+			.rowgrid {
+				display: grid;
+				grid-template-columns: repeat(2,1fr);
+				grid-template-rows: repeat(3, 1fr);
+				grid-template-areas: 
+			    "a b"
+			    "c1 c2"
+			    "d1 d2";
+			}
+
+			.a {
+				grid-area: a;
+				height: 85%;
+				text-align: center;
+				border-right: 1px dotted #dad9d9;
+			}
+
+			.b {
+				grid-area: b;
+				height: 85%;
+				text-align: center;
+			}
+			.a, .b {
+				padding-top: 15px;
+				padding-right: 5px;
+				padding-left: 5px;
+			}
+			.c1 {
+				grid-area: c1;
+				display: grid;
+				grid-template-columns:repeat(3,min-content);
+				justify-self: end;
+			}
+
+			.c2 {
+				grid-area: c2;
+				display: grid;
+				grid-template-columns:repeat(3,min-content);
+				justify-self: start;
+			}
+
+			.d1, .d2 {
+				font-size: 0.5rem;
+			}
+		}
 	</style>
 <body>
 <header>
-	<div class="question">Welche Verhaltensmerkmale treffen nach Ihrem Urteil für <u>Ihre Persönlichkeit</u> zu?</div>
+	<div id="question">Welche Verhaltensmerkmale treffen nach Ihrem Urteil für <u>Ihre Persönlichkeit</u> zu?</div>
 </header>
 <main>
 	<button id='next'>weiter</button>
 </main>
+
+<script id='rowTemplate2' type="template">
+	<div class="rowgrid2">
+		<div class="e">{left}</div>
+		<div class="f">{right}</div>
+		<div class="g" data-id='{idLeft}'>
+			<button class="rate buttonstart" onclick="rate(this)">-3</button>
+			<button class="rate" onclick="rate(this)">-2</button>
+			<button class="rate" onclick="rate(this)">-1</button>
+			<button class="rate" onclick="rate(this)">0</button>
+			<button class="rate" onclick="rate(this)">1</button>
+			<button class="rate" onclick="rate(this)">2</button>
+			<button class="rate buttonend" onclick="rate(this)">3</button>
+		</div>
+		<div class="h" data-id='{idRight}'>
+			<button class="rate buttonstart" onclick="rate(this)">-3</button>
+			<button class="rate" onclick="rate(this)">-2</button>
+			<button class="rate" onclick="rate(this)">-1</button>
+			<button class="rate" onclick="rate(this)">0</button>
+			<button class="rate" onclick="rate(this)">1</button>
+			<button class="rate" onclick="rate(this)">2</button>
+			<button class="rate buttonend" onclick="rate(this)">3</button>
+		</div>
+	</div>
+</script>	
 
 <script id='rowTemplate' type="template">
 	<div class="rowgrid">
@@ -241,6 +304,14 @@
 </script>
 	
 <script>
+	var questions = [
+		'Welche Verhaltensmerkmale treffen nach Ihrem Urteil für <u>Ihre Persönlichkeit</u> zu?',
+		'Wie wirken Sie - nach Ihrer Meinung - auf die Menschen, die für Sie von Bedeutung sind?',
+		'Durch welche Verhaltensmerkmale <u>möchten</u> Sie auf die Menschen wirken, die für Sie von Bedeutung sind?',
+		'Weche Verhaltensmerkmale schätzen Sie bzw. lehnen Sie mit welcher Gewichtung ab?',
+		'Ihre Auswertung:'
+	];
+
 	var items = [
 		[{text:'offensiv', type:'m'}, {text:'zurückhaltend',type:'i'}],
 		[{text:'engagiert', type:'ms'},{text:'abwartend',type:'i'}],
@@ -274,54 +345,134 @@
 		[{text:'zögernd', type:'i'},{text:'entschlossen',type:'m'}],
 		];
 
-
-	// set top margin of the main grid based on the actual header size
-	var header = document.querySelector('header');
-	var main = document.querySelector('main');
-	var headerHeight = header.offsetHeight;
-	main.style.marginTop = headerHeight;
-	window.addEventListener('resize', function(){
-		var newHeight = header.offsetHeight;
-		if (newHeight == headerHeight) return;
-		headerHeight = newHeight;
-		main.style.marginTop = headerHeight;
-	});
-
-	// render questions
-	var template = document.getElementById('rowTemplate').text.trim();
-	var rows = '';
-	for (var i = 0; i < items.length; i++) {
-		var itemrow = items[i];
-		var left = itemrow[0].text;
-		var right = itemrow[1].text;
-		rows += template.replace(/{left}/,left).replace(/{right}/,right).replace(/{radioName}/g,i);
-	}
-	main.innerHTML = rows + main.innerHTML;
+	var colors = ['#023756', '#3E053A', '#6091A2', '#C2468F','#023756'];
 
 	var glValues = {m:0,s:0,i:0};
-	var glAnswers= {tab1:[], tab2:[], tab3:[], tab4:[]};
-	var numAnswered=0;
+	var glAnswers = [ [],[],[],[] ];
+	var glNumAnswersGiven = 0;
+	var glNumAnswersTotal = 3;items.length;
+	var glCurrentQuestion = 0;
+	var glResults = [[],[],[],[]];
+
+	renderFirstQuestion();
+	//document.querySelector('main').style.marginTop = document.querySelector('header').offsetHeight;
+	//renderRatingQuestion();
+
+	function renderFirstQuestion() {
+		// render current question
+		document.getElementById('question').innerHTML=questions[glCurrentQuestion];
+
+		// set top margin of the main grid based on the actual header size
+		var header = document.querySelector('header');
+		var main = document.querySelector('main');
+		var headerHeight = header.offsetHeight;
+		main.style.marginTop = headerHeight;
+		window.addEventListener('resize', function(){
+			var newHeight = header.offsetHeight;
+			if (newHeight == headerHeight) return;
+			headerHeight = newHeight;
+			main.style.marginTop = headerHeight;
+		});
+
+		// render items
+		var template = document.getElementById('rowTemplate').text.trim();
+		var rows = '';
+		for (var i = 0; i < items.length; i++) {
+			var itemrow = items[i];
+			var left = itemrow[0].text;
+			var right = itemrow[1].text;
+			rows += template.replace(/{left}/,left).replace(/{right}/,right).replace(/{radioName}/g,i);
+		}
+		main.innerHTML = rows + main.innerHTML;
+
+		document.getElementById('next').addEventListener('click', nextQuestion);
+	}
+	
+	function renderRatingQuestion(){
+		// render items
+		var main = document.querySelector('main');
+		var template = document.getElementById('rowTemplate2').text.trim();
+		var rows = '';
+		for (var i = 0; i < items.length; i++) {
+			var itemrow = items[i];
+			var left = itemrow[0].text;
+			var right = itemrow[1].text;
+			rows += template.replace(/{left}/,left).replace(/{right}/,right)
+			.replace(/{idLeft}/,i+'-0').replace(/{idRight}/,i+'-1');
+		}
+		main.innerHTML = rows + "<button id='next'>weiter</button>";//FIXME
+		document.getElementById('next').addEventListener('click', nextQuestion);
+	}	
 
 	function tick(radio,parent){
 		radio.checked = true;
-		parent.parentNode.parentNode.querySelectorAll('button').forEach(function(elem){elem.style.backgroundColor='#88A040'})
+		parent.parentNode.parentNode.querySelectorAll('button').forEach(function(elem){elem.style.backgroundColor='#88A040'});
 		parent.style.backgroundColor='#6091A2';
 
 		var itemID = radio.name;
 		var answerItem = items[itemID][(radio.value<0)?0:1];
-		glAnswers.tab1[itemID] = [answerItem,radio.value];
-		numAnswered++;
+		glAnswers[glCurrentQuestion][itemID] = [answerItem,radio.value];
+		glNumAnswersGiven++;
 		calcResults();
 		checkIsDone();
 	}
+
+	function rate(btn){
+		btn.parentNode.querySelectorAll('button').forEach(function(elem){elem.style.backgroundColor='#6091A2'});
+		btn.style.backgroundColor='#88A040';
+		var item = btn.parentNode.dataset.id;
+		var split = item.split('-');
+		var itemID = split[0];
+		var subItemID = split[1];
+		var answerItem = items[itemID][split[1]];
+		var value = btn.innerText;
+		if (glAnswers[glCurrentQuestion][itemID] === undefined){
+			glAnswers[glCurrentQuestion][itemID] = [];
+		}
+		glAnswers[glCurrentQuestion][itemID][subItemID] = [answerItem,value];
+		//console.log(glAnswers);
+		glNumAnswersGiven++;
+		calcRatings();
+		//console.log(glValues);
+
+		if(glNumAnswersGiven == glNumAnswersTotal*2){
+			var next = document.getElementById('next');
+			next.style.display="block";
+			next.scrollIntoView();
+		}
+	}
 	
+	function calcRatings() {
+		glValues = {m:0,s:0,i:0};
+		// walk through all items backwards and calculate the total sum of each type
+		for (var i = glAnswers[glCurrentQuestion].length - 1; i >= 0; i--) {
+			for (var k = 0; k<2; k++){
+				if (glAnswers[glCurrentQuestion][i] === undefined || 
+					glAnswers[glCurrentQuestion][i][k] === undefined){
+					continue;
+				}
+				var item = glAnswers[glCurrentQuestion][i][k];
+				var typeString = item[0].type;
+				var value = item[1];
+				for (var j = typeString.length - 1; j >= 0; j--) {
+					if (typeString[j] == 'i')
+						glValues.i += Math.abs(value);
+					if (typeString[j] == 'm')
+						glValues.m += Math.abs(value);
+					if (typeString[j] == 's')
+						glValues.s += Math.abs(value);
+				}
+			}
+		}
+	}
+
 	function calcResults() {
 		glValues = {m:0,s:0,i:0};
-		for (var i = glAnswers.tab1.length - 1; i >= 0; i--) {
-			if (glAnswers.tab1[i] === undefined){
+		for (var i = glAnswers[glCurrentQuestion].length - 1; i >= 0; i--) {
+			if (glAnswers[glCurrentQuestion][i] === undefined){
 				continue;
 			}
-			var item = glAnswers.tab1[i];
+			var item = glAnswers[glCurrentQuestion][i];
 			var typeString = item[0].type;
 			var value = item[1];
 			for (var j = typeString.length - 1; j >= 0; j--) {
@@ -333,17 +484,52 @@
 					glValues.s += Math.abs(value);
 			}
 		};
-		//console.log(glValues);
+		console.log(glValues);
 	}
 	
-	function checkIsDone () {
-		if (numAnswered == items.length){
+	function checkIsDone() {
+		if (glNumAnswersGiven == glNumAnswersTotal){
 			var next = document.getElementById('next');
 			next.style.display="block";
 			next.scrollIntoView();
 		}
 	}
 
+	function nextQuestion() {
+		glResults[glCurrentQuestion++] = glValues;
+		glValues = {m:0,s:0,i:0};
+		glNumAnswersGiven = 0;
+		
+		document.getElementById('question').innerHTML=questions[glCurrentQuestion];
+		document.getElementById('question').style.backgroundColor = colors[glCurrentQuestion];
+		document.getElementById('next').style.display='none';
+		document.querySelector('main').style.marginTop = document.querySelector('header').offsetHeight;
+
+		window.scrollTo(0,0);
+		
+		if (glCurrentQuestion == 3) {
+			renderRatingQuestion();
+			return;
+		}
+		else if (glCurrentQuestion == 4) {
+			showResults();
+			return;
+		}
+		else {
+			// reset all radio buttons to unchecked
+			document.querySelectorAll('button').forEach(function(elem){
+				elem.style.backgroundColor='#88A040';
+				if (elem.children[0] != undefined){
+					elem.children[0].checked=false;
+				}
+			});
+		}
+	}
+
+	function showResults(){
+		document.querySelector('main').innerHTML = 'Tataaa:';
+		console.log(glResults);
+	}
 	
 
 </script>
