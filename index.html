@@ -5,7 +5,9 @@
 	<link href="https://fonts.googleapis.com/css?family=Libre+Baskerville" rel="stylesheet">
 	<title>Enneagram Test</title>
 	<style type="text/css">
+
 		html, body{
+
 			margin: 0;
 			padding: 0;
 			height: 100%;
@@ -176,9 +178,10 @@
 		}
 
 		.statsTotal {
-			padding-top: 1.4rem;
+			padding-top: 1.9rem;
+			padding-bottom: 1.7rem;
 			display: grid;
-			grid-template-columns: 30% 1fr 1fr 1fr 30%;
+			grid-template-columns: 30% 1fr minmax(200,auto) 1fr 30%;
 			grid-template-rows: minmax(100,auto) minmax(2rem,auto);
 			grid-template-areas: '. m s i .' '. ml sl il .';
 			justify-items: center;
@@ -199,23 +202,23 @@
 			color: white;
 			padding-top: 0;
 			padding-bottom: 0;
-    		padding-left: 1.4rem;
-    		padding-right: 1.4rem;
+    		padding-left: 2rem;
+    		padding-right: 2rem;
     		border-top-left-radius: 5px;
     		border-top-right-radius: 5px;
     		box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 		}
 		.m {
 			background-color: #6091A2;
-			height: 12;
+			height: 30;
 		}
 		.s {
 			background-color: #C2468F;
-			height: 123;
+			height: 30;
 		}
 		.i {
 			background-color: #88A040;
-			height: 50;
+			height: 30;
 		}
 		.ml {
 			grid-area: ml;
@@ -225,6 +228,33 @@
 		}
 		.il {
 			grid-area: il;
+		}
+
+		.legend {
+			font-family: "Libre Baskerville",Georgia,serif;
+			font-size: 0.9rem;
+			padding: 1rem;
+			color: rgba(0,0,0,0.5);
+			line-height: 1.4rem;
+		}
+
+		
+		.legend ul {
+			list-style-type: square;
+			color: rgba(0,0,0,1);
+		}
+
+		.legend strong {
+			color: rgba(0,0,0,1);
+		}
+
+		.legend h3 {
+			color: white;
+		    font-variant: small-caps;
+		    padding: 10px;
+		}
+		.legend li {
+			padding: 10px;
 		}
 
 		@media screen and (max-width: 39.9375em) {
@@ -344,7 +374,8 @@
 			}
 
 			.statsTotal {
-				padding-top: 1.4rem;
+				padding-top: 1.7rem;
+				padding-bottom: 1.5rem;
 				display: grid;
 				grid-template-columns: 1fr 1fr 1fr;
 				grid-template-rows: minmax(100,auto) minmax(2rem,auto);
@@ -352,7 +383,41 @@
 				justify-items: center;
 				align-items: end;
 			}
+
+			.legend {
+			    font-family: "Libre Baskerville",Georgia,serif;
+			    font-size: 0.7rem;
+			    padding-top: 0;
+			    padding-left: 10px;
+			    padding-right: 10px;
+			    color: rgba(0,0,0,0.5);
+			    line-height: 1rem;
+			}
+
+			.legend ul {
+				list-style-type: square;
+				line-height: 1.1rem;
+				color: rgba(0,0,0,1);
+				padding-left: 25px;
+			}
+
+			.legend strong {
+				color: rgba(0,0,0,1);
+			}
+
+			.legend h3 {
+				color: white;
+			    font-variant: small-caps;
+			    padding: 10px;
+			}
+			.legend li {
+				padding: 0;
+				padding-bottom: 16px;
+			}
 		}
+
+		
+
 	</style>
 <body>
 <header>
@@ -373,11 +438,12 @@
 		<div class="sl">Soziale Bindung</div>
 		<div class="il">Intellekt</div>
 	</div>
-	<div>
-		<h3>Macht</h3>
-		(Dominantes Steuerungszentrum: Fähigkeit zur Durchsetzung von Beherrschungs- / Gestaltungsansprüchen) 
-		<p>
-			Dominanten: (ausgeprägte Sinnesorgane: Nase / Ohr)
+	<div class="legend">
+		<h3 class="m">Macht</h3>
+		<em>Dominantes Steuerungszentrum: Fähigkeit zur Durchsetzung von Beherrschungs- / Gestaltungsansprüchen <br>
+		Ausgeprägte Sinnesorgane: Nase / Ohr</em>
+		<br><br>
+		<strong>Dominanten:</strong>
 			<ul>
 				<li>Grundbedürfnis: Autonomie / Führung / Ergebnisorientierung</li>
 				<li>Umweltorientierung / Reaktionen primär instinktgeführt </li>
@@ -392,15 +458,17 @@
 				<li>Seltene Ängstlichkeit / Furcht tarnen sich hinter Machtdemonstrationen</li>
 				<li>Summarisches Erscheinungsbild: Selbstsicherheit, Führungsanspruch, Zielstrebigkeit</li>
 			</ul>
-		</p>
+		
 		<br>
 		
 	</div>
-	<div>
-		<h3>Soziale Bindung</h3>
-		(Dominantes Steuerungszentrum: die emotionalen Fähigkeiten zur Begründung und Entwicklung von Beziehungen)
-		<p>
-			Dominanten: (ausgeprägte Sinnesorgane: Tastsinn / Geschmack)
+	<div class="legend">
+		<h3 class="s">Soziale Bindung</h3>
+		<em> Dominantes Steuerungszentrum: die emotionalen Fähigkeiten zur Begründung und Entwicklung von Beziehungen<br>
+		Ausgeprägte Sinnesorgane: Tastsinn / Geschmack </em>
+		<br><br>
+		<strong>
+			Dominanten: </strong>
 			<ul>
 				<li>Grundbedürfnis: Kommunikation, Anerkennung, Soziale Einbindung</li>
 				<li>Hauptbestreben: In Beziehungsnetzen für das Wohl anderer da sein / hierfür Aufmerksamkeit, Zuwendung, Anerkennung (Dank) erhalten </li>
@@ -414,15 +482,15 @@
 				<li>Sachliche Misserfolge: kein Problem</li>
 				<li>Persönliche Misserfolge: Katastrophe! / Nichtbeachtung und Einsamkeit sind kaum erträglich</li>
 				<li>Summarisches Erscheinungsbild: Fröhlich / Für andere da sein / Suche nach Anerkennung</li>
-				<li></li>
 			</ul>
-		</p>
 	</div>
-	<div>
-		<h3>Intellekt</h3>
-		(Dominantes Steuerungszentrum: die intellektuellen Fähigkeiten, um das neue Umfeld und sich selbst zu erkennen und für eigene Ziele nutzbar zu machen)
-		<p>
-			Dominanten: (ausgeprägte Sinnesorgane: Auge)
+	<div class="legend">
+		<h3 class="i">Intellekt</h3>
+		<em>Dominantes Steuerungszentrum: die intellektuellen Fähigkeiten, um das neue Umfeld und sich selbst zu erkennen und für eigene Ziele nutzbar zu machen<br>
+		Ausgeprägte Sinnesorgane: Auge</em>
+		<br><br>
+		<strong>
+			Dominanten:</strong>
 			<ul>
 				<li>Grundbedürfnis: Aus Abstand Übersicht gewinnen</li>
 				<li>Gelebt wird in: der Gegenwart / den Zukunftsprojekten</li>
