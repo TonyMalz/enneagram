@@ -175,6 +175,58 @@
     		background-color: #6091A2;
 		}
 
+		.statsTotal {
+			padding-top: 1.4rem;
+			display: grid;
+			grid-template-columns: 30% 1fr 1fr 1fr 30%;
+			grid-template-rows: minmax(100,auto) minmax(2rem,auto);
+			grid-template-areas: '. m s i .' '. ml sl il .';
+			justify-items: center;
+			align-items: end;
+			text-align: center;
+
+		}
+		.statM {
+			grid-area: m;
+		}
+		.statS {
+			grid-area: s;
+		}
+		.statI {
+			grid-area: i;
+		}
+		.m,.s,.i {
+			color: white;
+			padding-top: 0;
+			padding-bottom: 0;
+    		padding-left: 1.4rem;
+    		padding-right: 1.4rem;
+    		border-top-left-radius: 5px;
+    		border-top-right-radius: 5px;
+    		box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+		}
+		.m {
+			background-color: #6091A2;
+			height: 12;
+		}
+		.s {
+			background-color: #C2468F;
+			height: 123;
+		}
+		.i {
+			background-color: #88A040;
+			height: 50;
+		}
+		.ml {
+			grid-area: ml;
+		}
+		.sl {
+			grid-area: sl;
+		}
+		.il {
+			grid-area: il;
+		}
+
 		@media screen and (max-width: 39.9375em) {
 			html, body{
 				margin: 0;
@@ -290,13 +342,101 @@
 			    width: 21px;
 			    padding: 0;
 			}
+
+			.statsTotal {
+				padding-top: 1.4rem;
+				display: grid;
+				grid-template-columns: 1fr 1fr 1fr;
+				grid-template-rows: minmax(100,auto) minmax(2rem,auto);
+				grid-template-areas: 'm s i' 'ml sl il';
+				justify-items: center;
+				align-items: end;
+			}
 		}
 	</style>
 <body>
 <header>
-	<div id="question">Welche Verhaltensmerkmale treffen nach Ihrem Urteil für <u>Ihre Persönlichkeit</u> zu?</div>
+	<div id="question">Ihre Auswertung:</div>
 </header>
 <main>
+	<div class="statsTotal">
+		<div class="statM">
+			<div class="statResult">12</div><div class="m"> </div>
+		</div>
+		<div class="statS">
+			<div class="statResult">123</div><div class="s"> </div>
+		</div>
+		<div class="statI">
+			<div class="statResult">50</div><div class="i"> </div>
+		</div>
+		<div class="ml">Macht</div>
+		<div class="sl">Soziale Bindung</div>
+		<div class="il">Intellekt</div>
+	</div>
+	<div>
+		<h3>Macht</h3>
+		(Dominantes Steuerungszentrum: Fähigkeit zur Durchsetzung von Beherrschungs- / Gestaltungsansprüchen) 
+		<p>
+			Dominanten: (ausgeprägte Sinnesorgane: Nase / Ohr)
+			<ul>
+				<li>Grundbedürfnis: Autonomie / Führung / Ergebnisorientierung</li>
+				<li>Umweltorientierung / Reaktionen primär instinktgeführt </li>
+				<li>Lebenssituationen werden als Kampfplatz empfunden; Wichtig: Durchsetzen - Führen!<br>Basis: Macht und Gerechtigkeit - es muss klar sein, wer das Sagen hat! Weg: klärende Provokation!</li>
+				<li>Klarer Anspruch auf ein eigenenes 'Revier / Rudel'</li>
+				<li>Gelebt wird in der Gegenwart. Vergangenheit / Zukunft dienen der Orientierung / Motivationen</li>
+				<li>Verhaltens-Schwerpunkt: Umsetzen von Zielen - kein visionäres Planen</li>
+				<li>Instinktive Sicherheit im Erkennen von: Wahrheit, Verschleierung, Lüge</li>
+				<li>'Unechtes' wird schonungslos öffentlich aufgedeckt</li>
+				<li>Kommunikation ist offen, direkt, häufig versteckt aggressiv (Dominanzverhalten 'Alpha-Tier')</li>
+				<li>Pannen / Misserfolge gehen auf das eigene 'Schuld-Konto'</li>
+				<li>Seltene Ängstlichkeit / Furcht tarnen sich hinter Machtdemonstrationen</li>
+				<li>Summarisches Erscheinungsbild: Selbstsicherheit, Führungsanspruch, Zielstrebigkeit</li>
+			</ul>
+		</p>
+		<br>
+		
+	</div>
+	<div>
+		<h3>Soziale Bindung</h3>
+		(Dominantes Steuerungszentrum: die emotionalen Fähigkeiten zur Begründung und Entwicklung von Beziehungen)
+		<p>
+			Dominanten: (ausgeprägte Sinnesorgane: Tastsinn / Geschmack)
+			<ul>
+				<li>Grundbedürfnis: Kommunikation, Anerkennung, Soziale Einbindung</li>
+				<li>Hauptbestreben: In Beziehungsnetzen für das Wohl anderer da sein / hierfür Aufmerksamkeit, Zuwendung, Anerkennung (Dank) erhalten </li>
+				<li>Gelebt wird in: der Gegenwart / der Erinnerung / den Wünschen der Zukunft</li>
+				<li>Große Sensibilität für andere / Große Fähigkeit und Bereitschaft zur Anpassung mit daraus resultierender Abhängigkeit vom Handeln und Denken der anderen</li>
+				<li>Außenwirkung: fröhlich, interessiert, engagiert, aktiv, hilfsbereit - auf das Wohl anderer bedacht</li>
+				<li>Inneres Erleben häufig: unsicher, einsam, leer / Kompensation: neue Initiativen</li>
+				<li>Erlebt sich vor allem - gefühlsbetont - in den Reaktionen anderer</li>
+				<li>Kommunikation: fröhlich, offen, personenbezogen, einfühlsam</li>
+				<li>Erfolge = Emotionaler Stabilisator und 'Aktivator' der Persönlichkeit</li>
+				<li>Sachliche Misserfolge: kein Problem</li>
+				<li>Persönliche Misserfolge: Katastrophe! / Nichtbeachtung und Einsamkeit sind kaum erträglich</li>
+				<li>Summarisches Erscheinungsbild: Fröhlich / Für andere da sein / Suche nach Anerkennung</li>
+				<li></li>
+			</ul>
+		</p>
+	</div>
+	<div>
+		<h3>Intellekt</h3>
+		(Dominantes Steuerungszentrum: die intellektuellen Fähigkeiten, um das neue Umfeld und sich selbst zu erkennen und für eigene Ziele nutzbar zu machen)
+		<p>
+			Dominanten: (ausgeprägte Sinnesorgane: Auge)
+			<ul>
+				<li>Grundbedürfnis: Aus Abstand Übersicht gewinnen</li>
+				<li>Gelebt wird in: der Gegenwart / den Zukunftsprojekten</li>
+				<li>Hauptbestreben: Distanz zum Lebensumfeld (Menschen, Sachverhalte, Gegenstände) wahren, um durch Ordnen, Gewichten, Bewerten Übersicht zu gewinnen</li>
+				<li>Außenwirkung: zurückhaltenend, ausgeglichen, interessiert, sachlich, klar, überzeugend - auch eitel - Einzelgänger / Gefühle sind intimes Terrain</li>
+				<li>Inneres Erleben häufig: unsicher, einsam, leer / Verlangen nach Zärtlichkeit wird hinter sachlicher Kontaktaufnahme versteckt</li>
+				<li>Kommunikation: zurückhaltend, interessiert, sachlich, offen / Schritt zum DU, zur Gemeinschaft benötigt Hilfe von außen</li>
+				<li>Erfolge = 'Kreiselkompass' für innere Stabilität mit 'Bodenhaftung'</li>
+				<li>Sachliche Misserfolge: kein Problem</li>
+				<li>Persönliche Misserfolge: verstärkte Sachorientierung</li>
+				<li>Summarisches Erscheinungsbild: Distanziert wirkendes Streben nach intellektueller Klarheit / Emotionales Erleben ist sekundär / Sehr beständig, zuverlässig</li>
+			</ul>
+		</p>
+	</div>
 	<button id='next'>weiter</button>
 </main>
 
@@ -343,7 +483,23 @@
 		<div class="d2"><span>eher</span><span>ziemlich</span><span>sehr</span></div>
 	</div>
 </script>
-	
+
+<script id='statTemplate' type="template">
+	<div class="statsTotal">
+		<div class="statM">
+			<div class="statResult">{m}</div><div class="m" style="height:{m}px;"></div>
+		</div>
+		<div class="statS">
+			<div class="statResult">{s}</div><div class="s" style="height:{s}px;"></div>
+		</div>
+		<div class="statI">
+			<div class="statResult">{i}</div><div class="i" style="height:{i}px;"></div>
+		</div>
+		<div class="ml">Macht</div>
+		<div class="sl">Soziale Bindung</div>
+		<div class="il">Intellekt</div>
+	</div>
+</script>	
 <script>
 	var questions = [
 		'Welche Verhaltensmerkmale treffen nach Ihrem Urteil für <u>Ihre Persönlichkeit</u> zu?',
@@ -393,11 +549,29 @@
 	var glNumAnswersGiven = 0;
 	var glNumAnswersTotal = 3;items.length;
 	var glCurrentQuestion = 0;
-	var glResults = [[],[],[],[]];
+	//var glResults = [[],[],[],[]];
+	var glResults = [{m:10,s:34,i:23},{m:6,s:40,i:12},{m:5,s:45,i:20},{m:12,s:56,i:20}];
 
-	renderFirstQuestion();
-	//document.querySelector('main').style.marginTop = document.querySelector('header').offsetHeight;
+	//renderFirstQuestion();
+	document.querySelector('main').style.marginTop = document.querySelector('header').offsetHeight;
 	//renderRatingQuestion();
+	//renderStats();
+
+	function renderStats() {
+		var template = document.getElementById('statTemplate').text.trim();
+		var main = document.querySelector('main');
+		var rows = '';
+		var totalM = 0;
+		var totalS = 0;
+		var totalI = 0;
+		for (var i = 0; i < glResults.length; i++) {
+			totalM += glResults[i].m;
+			totalI += glResults[i].i;
+			totalS += glResults[i].s;
+		}
+		rows += template.replace(/{m}/g,totalM).replace(/{s}/g,totalS).replace(/{i}/g,totalI);
+		main.innerHTML = rows;
+	}
 
 	function renderFirstQuestion() {
 		// render current question
