@@ -182,8 +182,11 @@
 			padding-bottom: 1.7rem;
 			display: grid;
 			grid-template-columns: 30% 1fr minmax(200,auto) 1fr 30%;
-			grid-template-rows: minmax(100,auto) minmax(2rem,auto);
-			grid-template-areas: '. m s i .' '. ml sl il .';
+			grid-template-rows: minmax(100,auto) minmax(0,auto) minmax(2rem,auto);
+			grid-template-areas:
+				'. m s i .'
+				'. m- s- i- .'
+				'. ml sl il .';
 			justify-items: center;
 			align-items: end;
 			text-align: center;
@@ -198,6 +201,15 @@
 		.statI {
 			grid-area: i;
 		}
+		.statM- {
+			grid-area: m-;
+		}
+		.statS- {
+			grid-area: s-;
+		}
+		.statI- {
+			grid-area: i-;
+		}
 		.m,.s,.i {
 			color: white;
 			padding-top: 0;
@@ -208,15 +220,25 @@
     		border-top-right-radius: 5px;
     		box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 		}
-		.m {
+		.m-,.s-,.i- {
+			color: white;
+			padding-top: 0;
+			padding-bottom: 0;
+    		padding-left: 2rem;
+    		padding-right: 2rem;
+    		border-bottom-left-radius: 5px;
+    		border-bottom-right-radius: 5px;
+    		box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+		}
+		.m,.m- {
 			background-color: #6091A2;
 			height: 30;
 		}
-		.s {
+		.s,.s- {
 			background-color: #C2468F;
 			height: 30;
 		}
-		.i {
+		.i,.i- {
 			background-color: #88A040;
 			height: 30;
 		}
@@ -378,8 +400,11 @@
 				padding-bottom: 1.5rem;
 				display: grid;
 				grid-template-columns: 1fr 1fr 1fr;
-				grid-template-rows: minmax(100,auto) minmax(2rem,auto);
-				grid-template-areas: 'm s i' 'ml sl il';
+				grid-template-rows: minmax(100,auto) minmax(0,auto) minmax(2rem,auto);
+				grid-template-areas:
+					'm s i'
+					'm- s- i-'
+					'ml sl il';
 				justify-items: center;
 				align-items: end;
 			}
@@ -416,7 +441,13 @@
 			}
 		}
 
-		
+		.statTitle {
+			align-self: end;
+			justify-self: center;
+			text-align: center;
+			padding-left: 10px;
+			padding-right: 10px;
+		}
 
 	</style>
 <body>
@@ -424,20 +455,80 @@
 	<div id="question">Ihre Auswertung:</div>
 </header>
 <main>
+	<button id='next'>weiter</button>
+</main>
+
+<script id='rowTemplate2' type="template">
+	<div class="rowgrid2">
+		<div class="e">{left}</div>
+		<div class="f">{right}</div>
+		<div class="g" data-id='{idLeft}'>
+			<button class="rate buttonstart" onclick="rate(this)">-3</button>
+			<button class="rate" onclick="rate(this)">-2</button>
+			<button class="rate" onclick="rate(this)">-1</button>
+			<button class="rate" onclick="rate(this)">0</button>
+			<button class="rate" onclick="rate(this)">1</button>
+			<button class="rate" onclick="rate(this)">2</button>
+			<button class="rate buttonend" onclick="rate(this)">3</button>
+		</div>
+		<div class="h" data-id='{idRight}'>
+			<button class="rate buttonstart" onclick="rate(this)">-3</button>
+			<button class="rate" onclick="rate(this)">-2</button>
+			<button class="rate" onclick="rate(this)">-1</button>
+			<button class="rate" onclick="rate(this)">0</button>
+			<button class="rate" onclick="rate(this)">1</button>
+			<button class="rate" onclick="rate(this)">2</button>
+			<button class="rate buttonend" onclick="rate(this)">3</button>
+		</div>
+	</div>
+</script>	
+
+<script id='rowTemplate' type="template">
+	<div class="rowgrid">
+		<div class="a">{left}</div>
+		<div class="b">{right}</div>
+		<div class="c1">
+			<button class="buttonstart" onclick="tick(this.children[0],this)"><input type="radio" name="{radioName}" value="-3"></button>
+			<button onclick="tick(this.children[0],this)"><input type="radio" name="{radioName}" value="-2"></button>
+			<button onclick="tick(this.children[0],this)"><input type="radio" name="{radioName}" value="-1"></button>
+		</div>
+		<div class="c2">
+			<button onclick="tick(this.children[0],this)"><input type="radio" name="{radioName}" value="1"></button>
+			<button onclick="tick(this.children[0],this)"><input type="radio" name="{radioName}" value="2"></button>
+			<button class="buttonend" onclick="tick(this.children[0],this)"><input type="radio" name="{radioName}" value="3"></button>
+		</div>
+		<div class="d1"><span>sehr</span><span>ziemlich</span><span>eher</span></div>
+		<div class="d2"><span>eher</span><span>ziemlich</span><span>sehr</span></div>
+	</div>
+</script>
+
+<script id='statTemplate' type="template">
+	<div class="statTitle">Auswertung: {statTitle}</div>
 	<div class="statsTotal">
 		<div class="statM">
-			<div class="statResult">12</div><div class="m"> </div>
+			<div class="statResult">{m}</div><div class="m" style="height:{mHeight}px;"></div>
 		</div>
 		<div class="statS">
-			<div class="statResult">123</div><div class="s"> </div>
+			<div class="statResult">{s}</div><div class="s" style="height:{sHeight}px;"></div>
 		</div>
 		<div class="statI">
-			<div class="statResult">50</div><div class="i"> </div>
+			<div class="statResult">{i}</div><div class="i" style="height:{iHeight}px;"></div>
+		</div>
+		<div class="statM-">
+			<div class="m-" style="height:{m-}px;"></div>
+		</div>
+		<div class="statS-">
+			<div class="s-" style="height:{s-}px;"></div>
+		</div>
+		<div class="statI-">
+			<div class="i-" style="height:{i-}px;"></div>
 		</div>
 		<div class="ml">Macht</div>
 		<div class="sl">Soziale Bindung</div>
 		<div class="il">Intellekt</div>
 	</div>
+</script>
+<script id="legendTemplate" type="template">
 	<div class="legend">
 		<h3 class="m">Macht</h3>
 		<em>Dominantes Steuerungszentrum: Fähigkeit zur Durchsetzung von Beherrschungs- / Gestaltungsansprüchen <br>
@@ -505,73 +596,11 @@
 			</ul>
 		</p>
 	</div>
-	<button id='next'>weiter</button>
-</main>
-
-<script id='rowTemplate2' type="template">
-	<div class="rowgrid2">
-		<div class="e">{left}</div>
-		<div class="f">{right}</div>
-		<div class="g" data-id='{idLeft}'>
-			<button class="rate buttonstart" onclick="rate(this)">-3</button>
-			<button class="rate" onclick="rate(this)">-2</button>
-			<button class="rate" onclick="rate(this)">-1</button>
-			<button class="rate" onclick="rate(this)">0</button>
-			<button class="rate" onclick="rate(this)">1</button>
-			<button class="rate" onclick="rate(this)">2</button>
-			<button class="rate buttonend" onclick="rate(this)">3</button>
-		</div>
-		<div class="h" data-id='{idRight}'>
-			<button class="rate buttonstart" onclick="rate(this)">-3</button>
-			<button class="rate" onclick="rate(this)">-2</button>
-			<button class="rate" onclick="rate(this)">-1</button>
-			<button class="rate" onclick="rate(this)">0</button>
-			<button class="rate" onclick="rate(this)">1</button>
-			<button class="rate" onclick="rate(this)">2</button>
-			<button class="rate buttonend" onclick="rate(this)">3</button>
-		</div>
-	</div>
-</script>	
-
-<script id='rowTemplate' type="template">
-	<div class="rowgrid">
-		<div class="a">{left}</div>
-		<div class="b">{right}</div>
-		<div class="c1">
-			<button class="buttonstart" onclick="tick(this.children[0],this)"><input type="radio" name="{radioName}" value="-3"></button>
-			<button onclick="tick(this.children[0],this)"><input type="radio" name="{radioName}" value="-2"></button>
-			<button onclick="tick(this.children[0],this)"><input type="radio" name="{radioName}" value="-1"></button>
-		</div>
-		<div class="c2">
-			<button onclick="tick(this.children[0],this)"><input type="radio" name="{radioName}" value="1"></button>
-			<button onclick="tick(this.children[0],this)"><input type="radio" name="{radioName}" value="2"></button>
-			<button class="buttonend" onclick="tick(this.children[0],this)"><input type="radio" name="{radioName}" value="3"></button>
-		</div>
-		<div class="d1"><span>sehr</span><span>ziemlich</span><span>eher</span></div>
-		<div class="d2"><span>eher</span><span>ziemlich</span><span>sehr</span></div>
-	</div>
-</script>
-
-<script id='statTemplate' type="template">
-	<div class="statsTotal">
-		<div class="statM">
-			<div class="statResult">{m}</div><div class="m" style="height:{m}px;"></div>
-		</div>
-		<div class="statS">
-			<div class="statResult">{s}</div><div class="s" style="height:{s}px;"></div>
-		</div>
-		<div class="statI">
-			<div class="statResult">{i}</div><div class="i" style="height:{i}px;"></div>
-		</div>
-		<div class="ml">Macht</div>
-		<div class="sl">Soziale Bindung</div>
-		<div class="il">Intellekt</div>
-	</div>
 </script>	
 <script>
 	var questions = [
 		'Welche Verhaltensmerkmale treffen nach Ihrem Urteil für <u>Ihre Persönlichkeit</u> zu?',
-		'Wie wirken Sie - nach Ihrer Meinung - auf die Menschen, die für Sie von Bedeutung sind?',
+		'Wie wirken Sie - nach <u>Ihrer Meinung</u> - auf die Menschen, die für Sie von Bedeutung sind?',
 		'Durch welche Verhaltensmerkmale <u>möchten</u> Sie auf die Menschen wirken, die für Sie von Bedeutung sind?',
 		'Weche Verhaltensmerkmale schätzen Sie bzw. lehnen Sie mit welcher Gewichtung ab?',
 		'Ihre Auswertung:'
@@ -618,10 +647,10 @@
 	var glNumAnswersTotal = 3;items.length;
 	var glCurrentQuestion = 0;
 	//var glResults = [[],[],[],[]];
-	var glResults = [{m:10,s:34,i:23},{m:6,s:40,i:12},{m:5,s:45,i:20},{m:12,s:56,i:20}];
+	var glResults = [{m:10,s:34,i:23},{m:6,s:40,i:12},{m:5,s:45,i:20},{m:-12,s:56,i:20}];
 
-	//renderFirstQuestion();
-	document.querySelector('main').style.marginTop = document.querySelector('header').offsetHeight;
+	renderFirstQuestion();
+	//document.querySelector('main').style.marginTop = document.querySelector('header').offsetHeight;
 	//renderRatingQuestion();
 	//renderStats();
 
@@ -632,13 +661,77 @@
 		var totalM = 0;
 		var totalS = 0;
 		var totalI = 0;
-		for (var i = 0; i < glResults.length; i++) {
-			totalM += glResults[i].m;
-			totalI += glResults[i].i;
-			totalS += glResults[i].s;
+		var m = 0;
+		var s = 0;
+		var i = 0;
+		var mNeg = 0;
+		var sNeg = 0;
+		var iNeg = 0;
+		for (var j = 0; j < glResults.length; j++) {
+			mNeg = 0;
+			sNeg = 0;
+			iNeg = 0;
+			
+			m = glResults[j].m;
+			i = glResults[j].i;
+			s = glResults[j].s;
+			
+			mHeight = m;
+			iHeight = i;
+			sHeight = s;
+
+			totalM += m;
+			totalI += i;
+			totalS += s;
+
+			if (m<0){
+				mNeg = Math.abs(m);
+				mHeight = 0
+			}
+			if (s<0){
+				sNeg = Math.abs(s);
+				sHeight = 0
+			}
+			if (i<0){
+				iNeg = Math.abs(i);
+				iHeight = 0
+			}
+			rows += template.replace(/{statTitle}/,questions[j])
+							.replace(/{m}/,m).replace(/{s}/,s).replace(/{i}/,i)
+							.replace(/{mHeight}/,mHeight).replace(/{sHeight}/,sHeight).replace(/{iHeight}/,iHeight)
+							.replace(/{m-}/,mNeg).replace(/{s-}/,sNeg).replace(/{i-}/,iNeg);
 		}
-		rows += template.replace(/{m}/g,totalM).replace(/{s}/g,totalS).replace(/{i}/g,totalI);
-		main.innerHTML = rows;
+
+		mNeg = 0;
+		sNeg = 0;
+		iNeg = 0;
+
+		m = totalM;
+		i = totalI;
+		s = totalS;
+		
+		mHeight = m;
+		iHeight = i;
+		sHeight = s;
+
+		if (m<0){
+			mNeg = Math.abs(m);
+			mHeight = 0
+		}
+		if (s<0){
+			sNeg = Math.abs(s);
+			sHeight = 0
+		}
+		if (i<0){
+			iNeg = Math.abs(i);
+			iHeight = 0
+		}
+		rows += template.replace(/{statTitle}/,'Gesamt')
+							.replace(/{m}/,m).replace(/{s}/,s).replace(/{i}/,i)
+							.replace(/{mHeight}/,mHeight).replace(/{sHeight}/,sHeight).replace(/{iHeight}/,iHeight)
+							.replace(/{m-}/,mNeg).replace(/{s-}/,sNeg).replace(/{i-}/,iNeg);
+
+		main.innerHTML = rows + document.getElementById('legendTemplate').text.trim();;
 	}
 
 	function renderFirstQuestion() {
@@ -718,11 +811,7 @@
 		calcRatings();
 		//console.log(glValues);
 
-		if(glNumAnswersGiven == glNumAnswersTotal*2){
-			var next = document.getElementById('next');
-			next.style.display="block";
-			next.scrollIntoView();
-		}
+		checkIsDoneRatings();
 	}
 	
 	function calcRatings() {
@@ -771,7 +860,32 @@
 	}
 	
 	function checkIsDone() {
-		if (glNumAnswersGiven == glNumAnswersTotal){
+		var isDone = true;
+		for (var i = items.length - 1; i >= 0; i--) {
+			if (glAnswers[glCurrentQuestion][i] === undefined){
+				isDone = false;
+				break;
+			}
+		}
+		if (isDone){
+			var next = document.getElementById('next');
+			next.style.display="block";
+			next.scrollIntoView();
+		}
+	}
+
+	function checkIsDoneRatings() {
+		var isDone = true;
+		for (var i = items.length - 1; i >= 0; i--) {
+			for (var k = 0; k<2; k++){
+				if (glAnswers[glCurrentQuestion][i] === undefined || 
+					glAnswers[glCurrentQuestion][i][k] === undefined){
+					isDone = false;
+					break;
+				}
+			}
+		}
+		if (isDone){
 			var next = document.getElementById('next');
 			next.style.display="block";
 			next.scrollIntoView();
@@ -795,7 +909,7 @@
 			return;
 		}
 		else if (glCurrentQuestion == 4) {
-			showResults();
+			renderStats()
 			return;
 		}
 		else {
@@ -809,11 +923,6 @@
 		}
 	}
 
-	function showResults(){
-		document.querySelector('main').innerHTML = 'Tataaa:';
-		console.log(glResults);
-	}
-	
 
 </script>
 </body>
