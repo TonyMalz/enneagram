@@ -3,7 +3,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link href="https://fonts.googleapis.com/css?family=Libre+Baskerville" rel="stylesheet">
-	<title>Enneagram Test</title>
+	<title>Enneagramm-Test</title>
 	<style type="text/css">
 
 		html, body{
@@ -279,6 +279,48 @@
 			padding: 10px;
 		}
 
+		.statTitle {
+			align-self: end;
+			justify-self: center;
+			text-align: center;
+			padding-left: 10px;
+			padding-right: 10px;
+		}
+		.start {
+			display: grid;
+			grid-gap: 2rem;
+			align-items: stretch;
+			justify-items: stretch;
+			align-self: center;
+			justify-self: center;
+			border-radius: 5px;
+			padding: 20px;
+			!height: 100%;
+			width: 70%;
+			border: 1px solid rgba(0, 0, 0, 0.2);
+    		box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    		color: rgba(0, 0, 0, 0.7);
+    		font-size: 1rem;
+    		text-align: center;
+		}
+		.start h3 {
+			border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+			padding: 20px;
+		}
+		.startBtn {
+			justify-self: center;
+			width: 50%;
+			height: 100%;
+			color: white;
+			font-size: 1rem;
+			padding: 20px;
+			border-radius: 15px;
+		}
+		.sup {
+			text-align: left;
+			font-size: 0.5rem;
+		}
+
 		@media screen and (max-width: 39.9375em) {
 			html, body{
 				margin: 0;
@@ -439,24 +481,79 @@
 				padding: 0;
 				padding-bottom: 16px;
 			}
+
+			.statTitle {
+				align-self: end;
+				justify-self: center;
+				text-align: center;
+				padding-left: 10px;
+				padding-right: 10px;
+			}
+			.start {
+				display: grid;
+				grid-gap: 1rem;
+				align-items: stretch;
+				justify-items: stretch;
+				align-self: center;
+				justify-self: center;
+				border-radius: 5px;
+				padding: 10px;
+				!height: 100%;
+				width: 80%;
+				border: 1px solid rgba(0, 0, 0, 0.2);
+	    		box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	    		color: rgba(0, 0, 0, 0.7);
+	    		font-size: 0.7rem;
+	    		text-align: center;
+			}
+			.start h3 {
+				border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+				padding: 20px;
+			}
+			.startBtn {
+				justify-self: center;
+				width: 50%;
+				height: 100%;
+				color: white;
+				font-size: 0.8rem;
+				padding: 20px;
+				border-radius: 15px;
+			}
+			.sup {
+				text-align: left;
+				font-size: 0.4rem;
+			}
 		}
 
-		.statTitle {
-			align-self: end;
-			justify-self: center;
-			text-align: center;
-			padding-left: 10px;
-			padding-right: 10px;
+		footer {
+			padding: 20px;
+			color: rgba(0,0,0,0.4);
+			font-size: 0.7rem;
 		}
-
 	</style>
 <body>
 <header>
-	<div id="question">Ihre Auswertung:</div>
+	<div id="question">Enneagramm-Test</div>
 </header>
 <main>
+	
 	<button id='next'>weiter</button>
 </main>
+<footer>&#169; Prof. Dr. Ulrich Jentzsch</footer>
+
+
+<script id="startPageTemplate" type="template">
+	<div class="start">
+		<h3>Enneagramm<sup class="sup">1</sup>: Impulsgruppen unserer Wahrnehmungs-, Verarbeitungs und Verhaltensdominanten<sup class="sup">2</sup></h3>
+		Diese Impulsgruppen wurden im Kindesalter durch vererbte Eigenschaften, durch Umweltanforderungen und durch eigene Ziele entwickelt.<br>
+		
+		<button class="startBtn" onclick="renderFirstQuestion();">Test starten</button>
+		<div class="sup">
+			(1) Enneagramm (enna = griech. neun): Modell für Wahrnehmungs, Verarbeitungs- und Verhaltensmuster.<br>
+			(2) dominant: Überwiegende Steuerungsimpulse für das Verhalten; werden vom Handelnden als 'einzig richtig' empfunden; sie sind für ihn 'typisch'
+		</div>
+	</div>
+</script>
 
 <script id='rowTemplate2' type="template">
 	<div class="rowgrid2">
@@ -626,7 +723,7 @@
 		[{text:'abwägend urteilend', type:'i'},{text:'spontan urteilend',type:'ms'}],
 		[{text:'pragmatisch orientiert', type:'ms'},{text:'prinzipiell orientiert',type:'i'}],
 		[{text:'durchsetzend', type:'mi'}, {text:'vermittelnd',type:'si'}],
-		[{text:'rendend', type:'s'},{text:'zuhörend',type:'si'}],
+		[{text:'redend', type:'s'},{text:'zuhörend',type:'si'}],
 		[{text:'belehrend', type:'m'},{text:'beratend',type:'i'}],
 		[{text:'interessiert', type:'msi'}, {text:'gleichgültig',type:'mi'}],
 		[{text:'flexibel', type:'s'},{text:'beharrend / starr',type:'m'}],
@@ -643,13 +740,11 @@
 
 	var glValues = {m:0,s:0,i:0};
 	var glAnswers = [ [],[],[],[] ];
-	var glNumAnswersGiven = 0;
-	var glNumAnswersTotal = 3;items.length;
 	var glCurrentQuestion = 0;
-	//var glResults = [[],[],[],[]];
-	var glResults = [{m:10,s:34,i:23},{m:6,s:40,i:12},{m:5,s:45,i:20},{m:-12,s:56,i:20}];
-
-	renderFirstQuestion();
+	var glResults = [[],[],[],[]];
+	//var glResults = [{m:10,s:34,i:23},{m:6,s:40,i:12},{m:5,s:45,i:20},{m:-12,s:56,i:20}];
+	renderStartPage()
+	//renderFirstQuestion();
 	//document.querySelector('main').style.marginTop = document.querySelector('header').offsetHeight;
 	//renderRatingQuestion();
 	//renderStats();
@@ -734,6 +829,22 @@
 		main.innerHTML = rows + document.getElementById('legendTemplate').text.trim();;
 	}
 
+	function renderStartPage() {
+		var header = document.querySelector('header');
+		var main = document.querySelector('main');
+		var headerHeight = header.offsetHeight;
+		main.style.marginTop = headerHeight;
+		window.addEventListener('resize', function(){
+			var newHeight = header.offsetHeight;
+			if (newHeight == headerHeight) return;
+			headerHeight = newHeight;
+			main.style.marginTop = headerHeight;
+		});
+
+		main.innerHTML = document.getElementById('startPageTemplate').text.trim();
+
+	}
+
 	function renderFirstQuestion() {
 		// render current question
 		document.getElementById('question').innerHTML=questions[glCurrentQuestion];
@@ -759,7 +870,7 @@
 			var right = itemrow[1].text;
 			rows += template.replace(/{left}/,left).replace(/{right}/,right).replace(/{radioName}/g,i);
 		}
-		main.innerHTML = rows + main.innerHTML;
+		main.innerHTML = rows + "<button id='next'>weiter</button>";//FIXME
 
 		document.getElementById('next').addEventListener('click', nextQuestion);
 	}
@@ -788,7 +899,6 @@
 		var itemID = radio.name;
 		var answerItem = items[itemID][(radio.value<0)?0:1];
 		glAnswers[glCurrentQuestion][itemID] = [answerItem,radio.value];
-		glNumAnswersGiven++;
 		calcResults();
 		checkIsDone();
 	}
@@ -807,7 +917,6 @@
 		}
 		glAnswers[glCurrentQuestion][itemID][subItemID] = [answerItem,value];
 		//console.log(glAnswers);
-		glNumAnswersGiven++;
 		calcRatings();
 		//console.log(glValues);
 
@@ -895,7 +1004,6 @@
 	function nextQuestion() {
 		glResults[glCurrentQuestion++] = glValues;
 		glValues = {m:0,s:0,i:0};
-		glNumAnswersGiven = 0;
 		
 		document.getElementById('question').innerHTML=questions[glCurrentQuestion];
 		document.getElementById('question').style.backgroundColor = colors[glCurrentQuestion];
