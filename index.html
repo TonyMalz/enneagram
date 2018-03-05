@@ -287,6 +287,9 @@
 			padding-right: 10px;
 		}
 		.start {
+			font-family: "Libre Baskerville",Georgia,serif;
+			margin-top: 10%;
+			margin-bottom:  10%;
 			display: grid;
 			grid-gap: 2rem;
 			align-items: stretch;
@@ -294,20 +297,22 @@
 			align-self: center;
 			justify-self: center;
 			border-radius: 5px;
-			padding: 20px;
-			!height: 100%;
-			width: 70%;
-			border: 1px solid rgba(0, 0, 0, 0.2);
+			width: 33rem;
     		box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     		color: rgba(0, 0, 0, 0.7);
     		font-size: 1rem;
     		text-align: center;
 		}
 		.start h3 {
-			border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-			padding: 20px;
+			box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+			padding-top: 20px;
+			padding-bottom: 20px;
+			background-color: rgba(62, 5, 58, 0.75);
+			color: white;
+			font-weight: normal;
 		}
 		.startBtn {
+			font-size: 1.3rem;
 			justify-self: center;
 			width: 50%;
 			height: 100%;
@@ -317,8 +322,15 @@
 			border-radius: 15px;
 		}
 		.sup {
+			padding: 10px;
 			text-align: left;
 			font-size: 0.5rem;
+			color: rgba(0, 0, 0, 0.3);
+		}
+		.suph {
+			padding-left: 3px;
+			font-size: 0.4rem;
+			color: rgba(255, 255, 255, 0.8);
 		}
 
 		@media screen and (max-width: 39.9375em) {
@@ -497,17 +509,13 @@
 				align-self: center;
 				justify-self: center;
 				border-radius: 5px;
-				padding: 10px;
-				!height: 100%;
 				width: 80%;
-				border: 1px solid rgba(0, 0, 0, 0.2);
 	    		box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 	    		color: rgba(0, 0, 0, 0.7);
 	    		font-size: 0.7rem;
 	    		text-align: center;
 			}
 			.start h3 {
-				border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 				padding: 20px;
 			}
 			.startBtn {
@@ -536,7 +544,6 @@
 	<div id="question">Enneagramm-Test</div>
 </header>
 <main>
-	
 	<button id='next'>weiter</button>
 </main>
 <footer>&#169; Prof. Dr. Ulrich Jentzsch</footer>
@@ -544,7 +551,7 @@
 
 <script id="startPageTemplate" type="template">
 	<div class="start">
-		<h3>Enneagramm<sup class="sup">1</sup>: Impulsgruppen unserer Wahrnehmungs-, Verarbeitungs und Verhaltensdominanten<sup class="sup">2</sup></h3>
+		<h3>Enneagramm<sup class="suph">1</sup> = Die Impulsgruppen unserer Wahrnehmungs-, Verarbeitungs und Verhaltensdominanten<sup class="suph">2</sup></h3>
 		Diese Impulsgruppen wurden im Kindesalter durch vererbte Eigenschaften, durch Umweltanforderungen und durch eigene Ziele entwickelt.<br>
 		
 		<button class="startBtn" onclick="renderFirstQuestion();">Test starten</button>
